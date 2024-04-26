@@ -2,21 +2,14 @@ package bean;
 
 import java.io.Serializable;
 
-public class School implements Serializable {
+public class Subject extends User implements Serializable {
 
-	/**
-	 * 学校コード:String
-	 */
 	private String cd;
-
-	/**
-	 * 学校名:String
-	 */
 	private String name;
+	private School school;
 
-	/**
-	 * ゲッター、セッター
-	 */
+
+
 	public String getCd() {
 		return cd;
 	}
@@ -32,4 +25,14 @@ public class School implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
+
+	public School getSchool() {
+		return school;
+	}
+	public void setSchool(School school) {
+		this.school = school;
+	}
+
 }
