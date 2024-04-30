@@ -20,18 +20,18 @@
 			<div>科目情報</div>
 		</div>
 		<div class = "col-2">
-			<label class="form-label" for="student-f2-select">クラス</label>
-				<select class="form-select " id="student-f2-select" name="f2">
+			<label class="form-label" for="student-f1-select">入学年度</label>
+				<select class="form-select " id="student-f1-select" name="f1">
 					<option value="0">--------</option>
 					<c:forEach var="num" items="${class_num_set}">
              			<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
-						<option value="${num}" <c:if test="${num==f2}">selected</c:if>>${num}</option>
+						<option value="${subject_cd}" <c:if test="${subject_cd==f3}">selected</c:if>>${subject_cd}</option>
 					</c:forEach>
 				</select>
 		</div>
 
-		<div class = "col-4">
-			<label class="form-label" for="student-f2-select">科目</label>
+		<div class = "col-2">
+			<label class="form-label" for="student-f2-select">クラス</label>
 				<select class="form-select " id="student-f2-select" name="f2">
 					<option value="0">--------</option>
 					<c:forEach var="num" items="${subject_cd_set}">
@@ -41,8 +41,8 @@
 				</select>
 		</div>
 
-		<div class = "col-2">
-			<label class="form-label" for="student-f2-select">回数</label>
+		<div class = "col-4">
+			<label class="form-label" for="student-f2-select">科目</label>
 				<select class="form-select " id="student-f2-select" name="f2">
 					<option value="0">--------</option>
 					<c:forEach var="num" items="${class_num_set}">
@@ -54,8 +54,20 @@
 		<div class = "col-2 text-center">
 		<button class = "btn btn-secondary" id = "filter-button">検索</button>
 		</div>
-
+		<p>学生情報</p>
+		<div>
+    		<label for="f4">学生番号:</label>
+    		<input type="text" id="f4" name="f4" placeholder="学生番号を入力してください" maxlength="10" required />
+		</div>
+		<button type="button" onclick="searchStudent()">検索</button>
 	</div>
+
+	<label></label>
+
+
+
+
+
 
 
 	<div class = "mt-2 text-warning">${errors.get("f1")}</div>
