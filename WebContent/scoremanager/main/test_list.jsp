@@ -54,7 +54,12 @@
 		<div class = "col-2 text-center">
 		<button class = "btn btn-secondary" id = "filter-button">検索</button>
 		</div>
-
+		<p>学生情報</p>
+		<div>
+    		<label for="f4">学生番号:</label>
+    		<input type="text" id="f4" name="f4" placeholder="学生番号を入力してください" maxlength="10" required />
+		</div>
+		<button type="button" onclick="searchStudent()">検索</button>
 	</div>
 
 	<label></label>
