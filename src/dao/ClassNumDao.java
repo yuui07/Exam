@@ -19,7 +19,7 @@ public class ClassNumDao extends Dao {
     	PreparedStatement statement = null;
 
     	try {
-    		statement = connection.prepareStatement("select * from class_num where school_cd=?");
+    		statement = connection.prepareStatement("SELECT class_num FROM class_num WHERE school_cd = ?");
     		statement.setString(1,school.getCd());
    			ResultSet rSet = statement.executeQuery();
 
