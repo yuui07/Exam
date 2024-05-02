@@ -33,10 +33,10 @@
                     <input type="text" class="form-control" id="name" name="name" value="${name}" maxlength="20" required placeholder="科目名を入力してください" style="color: #666;">
                     <div class="error-message" id="name-error"></div>
                 </div>
-                <button type="submit" class="btn btn-primary rounded-pill" style="background-color: #007bff; color: white;">登録</button>
+                <button type="submit" class="btn btn-primary rounded-pill" style="background-color: #007bff; color: white;"><a href="subject_create_done.jsp">登録</a></button>
             </form>
             <div class="mt-3">
-                <a href="SubjectManagement.action">戻る</a>
+                <a href="subject_list.jsp">戻る</a>
             </div>
         </section>
         <div class="error-message" id="general-error"></div>
