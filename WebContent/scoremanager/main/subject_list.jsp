@@ -20,7 +20,7 @@
         <section class="mo-4">
             <h2 class="h2 mb-3" style="background-color: #f2f2f2; padding: 10px;">科目管理</h2>
             <div class="my-2 text-end px-4">
-                <a href="SubjectCreate.action">新規登録</a>
+                <a href="subject_create.jsp">新規登録</a>
             </div>
             <table class="table table-hover">
                 <thead>
