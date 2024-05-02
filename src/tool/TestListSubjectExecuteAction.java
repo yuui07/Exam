@@ -38,7 +38,7 @@ public class TestListSubjectExecuteAction extends HttpServlet {
 
     private List<Student> getStudentsByYearClassAndSubject(String year, String classNum, String subjectName) {
         List<Student> students = new ArrayList<>();
-        String url = "jdbc:h2:~/test"; // 例: H2データベースのパス
+        String url = "jdbc:h2:~/exam"; // 例: H2データベースのパス
         String sql = "SELECT STUDENT_NO, POINT FROM TEST WHERE CLASS_NUM = ? AND SUBJECT_CD = ?";
 
         try (Connection conn = DriverManager.getConnection(url, "sa", ""); // ここでのユーザ名とパスワードは適宜変更してください
