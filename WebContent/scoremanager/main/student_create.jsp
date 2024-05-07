@@ -1,48 +1,81 @@
-<%-- 学生登録JSP --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/common/base.jsp">
-	<c:param name="title">
-  		得点管理システム
-	</c:param>
+<c:param name="title">
+	      得点管理システム
+</c:param>
+<c:param name="scripts"></c:param>
+<c:param name="content">
+<section class="mo-4">
+<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報登録</h2>
+<form action="StudentCreateExecute.action" method="get">
 
-	<c:param name="scripts"></c:param>
 
-	<c:param name="content">
-		<section class="me-4">
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報登録</h2>
+		  			<div class="col-11">
+<label class="form-label"for="student-f1-select">入学年度</label>
+<select class="form-select"id="student-f1-select"name="f1">
+<option value="0">-------</option>
+<option value="2011">2011</option>
+<option value="2012">2012</option>
+<option value="2013">2013</option>
+<option value="2014">2014</option>
+<option value="2015">2015</option>
+<option value="2016">2016</option>
 
-			<form action="StudentCreate.action" method="post">
-				<div class="row mx-3 my-0 mb-3 py-2 align-items-center rounded" id="filter">
-					<div class="col-lg-12">
-					<label class="form-label" for="ent-year-select">入学年度</label>
-					<select class="form-select" id="ent-year-select" name="ent_year">
-						<option value="0">--------</option>
-						<c:forEach var="year" items="${ent_year_set}">
-							<%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
-							<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
-						</c:forEach>
-					</select><br>
+<option value="2017">2017</option>
+<option value="2018">2018</option>
+<option value="2011">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="2023">2023</option>
+<c:forEach var="year" items="${ent_year_set}">
+<%--現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
+<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
+</c:forEach>
+</select>
+</div>
+<c:if test="${errors.get('f1')!=null}"><div class="col-16"><font color="FFD500">${errors.get("f1")}</font></div></c:if>
 
-					<label class="form-label" for="no">学生番号</label><br>
-					<input class="form-control px-4 fs-5" type="text" id="no" name="no" maxlength=10 value="${no}"size=84 placeholder="学生番号を入力してください" required><br><br>
 
-					<label class="form-label" for="name">氏名</label><br>
-					<input class="form-control px-4 fs-5" type="text" id="name" name="name" maxlength=30 value="${name}" size=84 placeholder="氏名を入力してください" required><br><br>
 
-					<label class="form-label" for="class_num">クラス</label>
-					<select class="form-select" id="class_num" name="class_num">
-					    <option value="0">--------</option>
-					    <c:forEach var="classNum" items="${class_num_set}">
-					        <option value="${classNum}">${classNum}</option>
-					    </c:forEach>
-					</select><br>
-					<button type="submit">登録して終了</button><br><br>
-					<a href="student_list.jsp">戻る</a>
-					</div>
-				</div>
-    		</form>
-		</section>
-	</c:param>
+
+		  <div class="col-11">
+<label class="form-label" for="student-f2-input">学生番号</label>
+<input type="text"  class="form-control" id="student-f2-input"name="f2" placeholder="学生番号を入力してください"<c:if test="${no!=null}">value="${no}"</c:if>>
+</div>
+<c:if test="${errors.get('f2')!=null}"><div class="col-16"><font color="FFD500">${errors.get("f2")}</font></div></c:if>
+
+
+		  			<div class="col-11">
+<label class="form-label" for="student-f3-input">氏名</label>
+<input type="text"  class="form-control" id="student-f3-input"name="f3" placeholder="氏名を入力してください"
+<c:if test="${name!=null}">value="${name}"</c:if>>
+</div>
+
+
+		  			<div class="col-11">
+<label class="form-label" for="student-f4-select">クラス</label>
+<select class="form-select" id="student-f4-select" name="f4">
+<option value="0">--------</option>
+<option value="101">101</option>
+<option value="102">102</option>
+<option value="201">201</option>
+<option value="202">202</option>
+<c:forEach var="num" items="${class_num_set}">
+<%--現在のnumと選択されていたf4が一致していた場合selectedを追記 --%>
+<option value="${num}"<c:if test="${num==f4}">selected</c:if>>${num}</option>
+</c:forEach>
+</select>
+</div>
+<br>
+
+
+		  			<div class="col-2 text-left">
+<button class="btn btn-secondary" id="filter-button">登録して終了</button>
+</div>
+<a class="nav-item px-2" href="Menu.action">戻る</a>
+</form>
+</section>
+</c:param>
 </c:import>
