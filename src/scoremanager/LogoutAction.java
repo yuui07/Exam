@@ -15,7 +15,7 @@ public class LogoutAction extends Action {
         if (session != null) {
             session.invalidate();
         }
-        // ログアウト後はログインページにリダイレクトする
-        res.sendRedirect("login.jsp");
+        // ログアウト後はログアウトJSPにフォワードする
+        req.getRequestDispatcher("logout.jsp").forward(req, res);
     }
 }
