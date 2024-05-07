@@ -9,7 +9,7 @@ import bean.Teacher;
 import dao.SubjectDao;
 import tool.Action;
 
-public class SubjectListAction extends Action {
+public class SubjectUpdateAction extends Action {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res)throws Exception {
@@ -28,7 +28,7 @@ public class SubjectListAction extends Action {
 
 
 	//JSPへフォワード 7
-		req.getRequestDispatcher("subject_list.jsp").forward(req, res);
+		req.getRequestDispatcher("subject_update.jsp").forward(req, res);
 	}
 
 }
