@@ -30,4 +30,3 @@
 		<a class="nav-item px-2" href="Logout.action">ログアウト</a>
 	</div>
 </c:if>
->>>>>>> refs/remotes/origin/master
