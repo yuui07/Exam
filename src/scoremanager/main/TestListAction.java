@@ -25,22 +25,17 @@ public class TestListAction extends Action {
         SubjectDao subjectDao = new SubjectDao();
 
         classNum = request.getParameter("f2");
-        subjectStr = request.getParameter("");
+        subjectStr = request.getParameter("subject");
 
 
         // DBからデータ取得 3
         // ログインユーザーの学校コードをもとにクラス番号の一覧を取得
         List<String> list = cNumDao.filter(teacher.getSchool());
-        List<String> list = subjectDao.filter(school.getCd());
+        List<Subject> subjects = subjectDao.filter(teacher.getSchool());
 
 
-        request.setAttribute("f2", classNum);
-        request.getAttribute("",subjectStr);
-
-
-        request.setAttribute("class_num_set", list);
-        request.setAttribute("subject_set",list );
-
+        request.setAttribute("classNum", classNum);
+        request.setAttribute("subjects", subjects);
 
         request.getRequestDispatcher("test_list.jsp").forward(request, response);
 

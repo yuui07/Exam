@@ -69,18 +69,8 @@
 							<td>${student.no}</td>
 							<td>${student.name}</td>
 							<td>${student.classNum}</td>
-							<td class="text-center">
-								<%-- 在学フラグがたっている場合「O」それ以外は「×」を表示 --%>
-								<c:choose>
-									<c:when test="$student.isAttend()}">
-										〇
-									</c:when>
-									<c:otherwise>
-										×
-									</c:otherwise>
-								</c:choose>
-							</td>
-							<td><a href="StudentUpdate.action?no=${student.no}">変更</a></td>
+
+							<td><a href="stundetupdate.action?no=${student.no}">変更</a></td>
 							<td><a href="StudentDelete.action?no=${student.no}">削除</a></td>
 						</tr>
 					</c:forEach>

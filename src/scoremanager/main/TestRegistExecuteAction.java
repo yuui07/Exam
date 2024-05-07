@@ -16,16 +16,16 @@ public class TestRegistExecuteAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
         // ローカル変数の宣言
         String url;
-        String enrollmentYear;
-        String className;
+        String entYearStr;
+        String classNum;
         String subject;
         int score;
         List<String> errors = new ArrayList<>();
         TestDao testDao = new TestDao();
 
         // リクエストパラメータ―の取得
-        enrollmentYear = req.getParameter("enrollmentYear");
-        className = req.getParameter("className");
+        entYearStr = req.getParameter("f1");
+        classNum = req.getParameter("f2");
         subject = req.getParameter("subject");
         String scoreStr = req.getParameter("score");
 
@@ -48,16 +48,16 @@ public class TestRegistExecuteAction extends Action {
 
         // テストデータの作成
         Test test = new Test();
-        test.setEntYear(EntYear);
-        test.setClassNum(className);
+        test.setentYearStr(entYearStr);
+        test.setClassNum(classNum);
         test.setSubject(subject);
-        test.setScore(score);
+        test.setPoint(score);
 
         // データベースにテストデータを登録
+        TestDao testDao = new TestDao();
         testDao.addTest(test);
 
         // 成績登録完了画面にリダイレクト
-        url = "test_regist_done.jsp";
-        res.sendRedirect(url);
+        res.sendRedirect("test_regist_done.jsp");
     }
 }
