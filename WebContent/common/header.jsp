@@ -18,8 +18,16 @@
     <h1 class="fs-1">得点管理システム</h1>
 </div>
 <c:if test="${user.isAuthenticated()}">
+<<<<<<< HEAD
     <div class="nav justify-content-center mt-3">
         <span class="nav-item px-2">${user.getName()}様</span>
         <a class="nav-item px-2" href="Logout.action">ログアウト</a>
     </div>
 </c:if>
+=======
+	<div class="nav align-self-end">
+		<span class="nav-item px-2">${user.getName()}様</span>
+		<a class="nav-item px-2" href="LogoutAction.java">ログアウト</a>
+	</div>
+</c:if>
+>>>>>>> refs/remotes/origin/master
