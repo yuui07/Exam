@@ -22,6 +22,24 @@ public class SubjectDao {
       this.connection = new Dao().getConnection();
   }
 
+
+    public SubjectDao() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public Subject get(String cd, School school) throws SQLException {
+        String sql = "SELECT * FROM Subject WHERE CD = ? AND SCHOOL_CD = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, cd);
+            stmt.setString(2, school.getCd());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return mapRowToSubject(rs, school);
+            }
+        }
+        return null;
+    }
+
   public Subject get(String cd, School school) throws SQLException {
       String sql = "SELECT * FROM Subject WHERE CD = ? AND SCHOOL_CD = ?";
       try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -34,6 +52,7 @@ public class SubjectDao {
       }
       return null;
   }
+
 
   public List<Subject> filter(School school) throws SQLException {
       List<Subject> subjects = new ArrayList<>();
