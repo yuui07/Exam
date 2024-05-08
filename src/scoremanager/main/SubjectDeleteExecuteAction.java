@@ -10,7 +10,7 @@ import bean.Teacher;
 import dao.SubjectDao;
 import tool.Action;
 
-public class SubjectDeleteExecutaAction extends Action {
+public class SubjectDeleteExecuteAction extends Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

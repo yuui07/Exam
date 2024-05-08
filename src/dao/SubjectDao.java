@@ -16,7 +16,7 @@ public class SubjectDao {
   private Connection connection;
 
   /**
-   * コンストラクタで Dao クラスから Connection を取得して初期化します。
+   * コンストラクタで Dao クラスから Connection を取得して初期化
    */
   public SubjectDao() throws Exception {
       this.connection = new Dao().getConnection();
