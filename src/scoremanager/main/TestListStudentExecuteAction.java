@@ -52,7 +52,6 @@ public class TestListStudentExecuteAction extends HttpServlet {
                 test.setClassNum(rs.getString("CLASS_NUM"));
                 test.setNo(rs.getInt("NO"));
                 test.setPoint(rs.getInt("POINT"));
-                // SubjectとSchoolの設定も必要であればここで行う
                 tests.add(test);
             }
         } catch (SQLException e) {
