@@ -80,7 +80,7 @@ public class TestDao {
     }
 
     public boolean save(List<Test> list) {
-        try (Connection conn = DriverManager.getConnection("jdbc:yourdburl", "username", "password")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/exam", "sa", "")) {
             for (Test test : list) {
                 if (!save(test, conn)) {
                     return false;
