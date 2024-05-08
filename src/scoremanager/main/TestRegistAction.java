@@ -43,10 +43,9 @@ public class TestRegistAction extends Action {
 
         // 学年一覧取得
         List<Integer> entYearList = new ArrayList<>();
-        // ここで適切な方法で学年一覧を取得する処理を実装
 
         // クラス番号一覧取得
-        List<String> classNumList = classNumDao.filter(teacher.getSchool());
+        List<String> classNumList = classNumDao.filter();
 
         // リクエスト属性にセット
         request.setAttribute("f1", entYear);
