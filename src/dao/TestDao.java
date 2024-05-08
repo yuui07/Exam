@@ -62,7 +62,7 @@ public class TestDao {
 
     public List<Student> filter(int entYear, String classNum, Subject subject, int num, School school) {
         List<Student> students = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection("jdbc:yourdburl", "username", "password");
+        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/exam", "sa", "");
              PreparedStatement stmt = conn.prepareStatement(baseSql + " WHERE ENTRY_YEAR = ? AND CLASS_NUM = ? AND SUBJECT_CD = ? AND NUM = ? AND SCHOOL_CD = ?")) {
 
             stmt.setInt(1, entYear);
