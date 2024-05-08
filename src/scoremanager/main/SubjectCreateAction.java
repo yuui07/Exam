@@ -6,11 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import tool.Action;
 
 public class SubjectCreateAction extends Action {
-
-	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-
-
-		req.getRequestDispatcher("subject_create.jsp").forward(req,  res);
+		req.getRequestDispatcher("subject_create.jsp").forward(req, res);
 	}
 }
