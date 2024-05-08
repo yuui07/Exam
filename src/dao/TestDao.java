@@ -95,12 +95,12 @@ public class TestDao {
 
     private boolean save(Test test, Connection conn) {
         try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO TEST (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)")) {
-            stmt.setString(1, test.getstudent().getNo());
-            stmt.setString(2, test.getsubject().getCd());
+            stmt.setString(1, test.getStudent().getNo());
+            stmt.setString(2, test.getSubject().getCd());
             stmt.setString(3, test.getSchool().getCd());
-            stmt.setInt(4, test.getno());
-            stmt.setInt(5, test.getpoint());
-            stmt.setString(6, test.getclassNum());
+            stmt.setInt(4, test.getNo());
+            stmt.setInt(5, test.getPoint());
+            stmt.setString(6, test.getClassNum());
             int affectedRows = stmt.executeUpdate();
             return affectedRows == 1;
         } catch (SQLException e) {
@@ -125,7 +125,7 @@ public class TestDao {
 
     private boolean delete(Test test, Connection conn) {
         try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM TEST WHERE NO = ?")) {
-            stmt.setInt(1, test.getno());
+            stmt.setInt(1, test.getNo());
             int affectedRows = stmt.executeUpdate();
             return affectedRows == 1;
         } catch (SQLException e) {

@@ -40,7 +40,7 @@ public class TestRegistExecuteAction extends Action {
         test.setClassNum(classNum);
 
         Subject subject = new Subject();
-        subject.setName(subjectStr); // SubjectクラスのsetNameが実装されていることが必要
+        subject.setName(subjectStr);
         test.setSubject(subject);
         test.setPoint(score);
 
