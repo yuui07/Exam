@@ -87,8 +87,9 @@ public class StudentUpdateExecuteAction extends Action {
 		        sDao.save(student);
 		    request.getRequestDispatcher("student_update_done.jsp").forward(request, response);
 		}
-	}
 
+
+	}
 }
 
 		//在学フラグが送信されていた場合
@@ -106,4 +107,5 @@ public class StudentUpdateExecuteAction extends Action {
 //
 //		//JSPにフォワード 7
 //		request.getRequestDispatcher("student_list.jsp").forward(request,response);
+
 
