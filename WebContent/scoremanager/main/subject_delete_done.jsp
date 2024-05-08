@@ -26,7 +26,7 @@
                 <div>
                 </div>
                 </div>
-                   <a href="SubjectsList.action">科目一覧</a>
+                   <a href="subjectlist.jsp">科目一覧</a>
         </section>
     </c:param>
 </c:import>
