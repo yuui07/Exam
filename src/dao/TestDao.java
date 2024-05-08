@@ -19,7 +19,7 @@ public class TestDao {
 
     public Test get(Student student, Subject subject, School school, int no) {
         Test test = null;
-        try (Connection conn = DriverManager.getConnection("jdbc:yourdburl", "username", "password");
+        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/exam", "sa", "");
              PreparedStatement stmt = conn.prepareStatement(baseSql + " WHERE STUDENT_NO = ? AND SUBJECT_CD = ? AND SCHOOL_CD = ? AND NO = ?")) {
 
             stmt.setString(1, student.getNo());
