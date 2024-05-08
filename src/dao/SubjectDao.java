@@ -10,12 +10,19 @@ import java.util.List;
 import bean.School;
 import bean.Subject; // 正しいパッケージからSubjectをインポート
 
-public class SubjectDao {
 
+
+public class SubjectDao {
+    private Dao dao;
     private Connection connection;
 
-    public SubjectDao(Connection connection) {
-        this.connection = connection;
+    /**
+     * SubjectDao のコンストラクタ
+     * Dao インスタンスを使用してデータベース接続を確立する
+     */
+    public SubjectDao() throws Exception {
+        this.dao = new Dao();
+        this.connection = dao.getConnection();
     }
 
     public Subject get(String cd, School school) throws SQLException {
@@ -72,3 +79,4 @@ public class SubjectDao {
         return subject;
     }
 }
+//a

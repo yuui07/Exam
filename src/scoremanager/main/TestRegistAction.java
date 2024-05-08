@@ -20,7 +20,7 @@ public class TestRegistAction extends Action {
         request.getRequestDispatcher("student_list.jsp").forward(request, response);
     }
 
-    public void setRequestData(HttpServletRequest request, HttpServletResponse response) {
+    public void setRequestData(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
 

@@ -19,7 +19,7 @@ public class TestDao {
 
     public Test get(Student student, Subject subject, School school, int no) {
         Test test = null;
-        try (Connection conn = DriverManager.getConnection("jdbc:yourdburl", "username", "password");
+        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/exam", "sa", "");
              PreparedStatement stmt = conn.prepareStatement(baseSql + " WHERE STUDENT_NO = ? AND SUBJECT_CD = ? AND SCHOOL_CD = ? AND NO = ?")) {
 
             stmt.setString(1, student.getNo());
@@ -80,7 +80,7 @@ public class TestDao {
     }
 
     public boolean save(List<Test> list) {
-        try (Connection conn = DriverManager.getConnection("jdbc:yourdburl", "username", "password")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/exam", "sa", "")) {
             for (Test test : list) {
                 if (!save(test, conn)) {
                     return false;
@@ -95,12 +95,12 @@ public class TestDao {
 
     private boolean save(Test test, Connection conn) {
         try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO TEST (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)")) {
-            stmt.setString(1, test.getstudent().getNo());
-            stmt.setString(2, test.getsubject().getCd());
+            stmt.setString(1, test.getStudent().getNo());
+            stmt.setString(2, test.getSubject().getCd());
             stmt.setString(3, test.getSchool().getCd());
-            stmt.setInt(4, test.getno());
-            stmt.setInt(5, test.getpoint());
-            stmt.setString(6, test.getclassNum());
+            stmt.setInt(4, test.getNo());
+            stmt.setInt(5, test.getPoint());
+            stmt.setString(6, test.getClassNum());
             int affectedRows = stmt.executeUpdate();
             return affectedRows == 1;
         } catch (SQLException e) {
@@ -110,7 +110,7 @@ public class TestDao {
     }
 
     public boolean delete(List<Test> list) {
-        try (Connection conn = DriverManager.getConnection("jdbc:yourdburl", "username", "password")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/exam", "sa", "")) {
             for (Test test : list) {
                 if (!delete(test, conn)) {
                     return false;
@@ -125,7 +125,7 @@ public class TestDao {
 
     private boolean delete(Test test, Connection conn) {
         try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM TEST WHERE NO = ?")) {
-            stmt.setInt(1, test.getno());
+            stmt.setInt(1, test.getNo());
             int affectedRows = stmt.executeUpdate();
             return affectedRows == 1;
         } catch (SQLException e) {
