@@ -18,7 +18,11 @@ public class SubjectDao {
         this.connection = connection;
     }
 
-    public Subject get(String cd, School school) throws SQLException {
+    public SubjectDao() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public Subject get(String cd, School school) throws SQLException {
         String sql = "SELECT * FROM Subject WHERE CD = ? AND SCHOOL_CD = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, cd);

@@ -107,4 +107,3 @@ public class StudentUpdateExecuteAction extends Action {
 //		//JSPにフォワード 7
 //		request.getRequestDispatcher("student_list.jsp").forward(request,response);
 
-コンテキスト メニューあり
