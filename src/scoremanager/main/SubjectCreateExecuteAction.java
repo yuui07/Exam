@@ -1,10 +1,12 @@
 package scoremanager.main;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDao;
@@ -12,32 +14,48 @@ import tool.Action;
 
 public class SubjectCreateExecuteAction extends Action {
 
-    @Override
-    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        //変数宣言
-        HttpSession session = req.getSession(); // セッション
-        Teacher teacher = (Teacher) session.getAttribute("user");
-        School school = teacher.getSchool();
-        SubjectDao subjectDao = new SubjectDao();
-        Subject subject = new Subject();
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+		HttpSession session = req.getSession();		// セッションを取得
+		Teacher teacher = (Teacher)session.getAttribute("user");
 
-        String cd = req.getParameter("cd");
-        String name = req.getParameter("name");
+		Subject subject = new Subject();
+
+		SubjectDao sDao = new SubjectDao();
+
+		Map<String, String> errors = new HashMap<>();	// エラーメッセージ
+
+		String url = "";	// 画面遷移で使うurl
+		String cd = "";
+		String name = "";
+
+		cd = req.getParameter("code");
+		name = req.getParameter("name");
+
+		if (cd.length() != 3) {
+			errors.put("cd_error", "科目コードは3文字で入力してください");
+			req.setAttribute("errors", errors);
+		}else {
+			if (sDao.get(cd, teacher.getSchool()) != null) {
+				errors.put("no_error", "科目コードが重複しています");
+				req.setAttribute("errors", errors);
+			}else {
+				// beenに値をセット
+				subject.setSchool(teacher.getSchool());
+				subject.setName(name);
+				subject.setCd(cd);
 
 
-        subject.setCd(cd);
-        subject.setName(name);
-        subject.setSchool(school);
+				//DBへデータ保存 5
+				sDao.save(subject);	// sqlを実行
 
+				url = "subject_create_done.jsp";
+				req.getRequestDispatcher(url).forward(req, res);
+			}
+			url = "SubjectCreate.action";
+			req.getRequestDispatcher(url).forward(req, res);
+		}
+	}
 
-        boolean saved = subjectDao.save(subject);
-
-        if (saved) {
-            //変更に成功した場合、成功ページにフォワード
-            req.getRequestDispatcher("subject_update_done.jsp").forward(req, res);
-        } else {
-            //保存に失敗した場合、学生リストページにフォワード
-            req.getRequestDispatcher("StudentList.action").forward(req, res);
-        }
-    }
 }
