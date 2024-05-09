@@ -54,3 +54,4 @@ public class TestRegistAction extends Action {
         request.setAttribute("class_num_set", classNumList);
     }
 }
+//a
