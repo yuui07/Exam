@@ -8,9 +8,8 @@
     <title>得点管理システム</title>
 </head>
 <body>
-    <h2>得点管理システム</h2>
-    <h3>ログアウトしました</h3>
-    <p>You have been logged out.</p>
+    <h2>ログアウト</h2>
+    <label>ログアウトしました</label>
     <p><a href="login.jsp">ログイン</a></p>
 </body>
 </html>
