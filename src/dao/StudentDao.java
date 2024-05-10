@@ -218,7 +218,7 @@ public class StudentDao extends Dao {
 			Student old =get(student.getNo());
 			if (old == null) {
 				statement = connection.prepareStatement(
-						"insert into student(no,name,ent_year,class_num,is_attend,school_cd)values(?.?.?.?.?.?)");
+						"insert into student(no,name,ent_year,class_num,is_attend,school_cd)values(?,?,?,?,?,?)");
 			statement.setString(1,student.getNo());
 			statement.setString(2,student.getName());
 			statement.setInt(3,student.getEntYear());
