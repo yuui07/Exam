@@ -45,7 +45,7 @@ public class TestRegistAction extends Action {
         List<Integer> entYearList = new ArrayList<>();
 
         // クラス番号一覧取得
-        List<String> classNumList = classNumDao.filter();
+        List<String> classNumList = classNumDao.filter(null);
 
         // リクエスト属性にセット
         request.setAttribute("f1", entYear);
@@ -54,3 +54,4 @@ public class TestRegistAction extends Action {
         request.setAttribute("class_num_set", classNumList);
     }
 }
+//a
