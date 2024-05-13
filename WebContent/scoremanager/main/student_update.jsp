@@ -18,10 +18,10 @@
 					<div class="col-lg-12">
 					<label class="form-label" for="ent-year">入学年度</label>
 					<br>
-					<input type="text" id="ent-year" value="${ent_year}" size=84 readonly><br><br>
+					<input type="text" id="ent-year" value="${ent_year}" size=84><br><br>
 
 					<label class="form-label" for="no">学生番号</label><br>
-					<input type="text" id="no" value="${no}"size=84 readonly><br><br>
+					<input type="text" id="no" value="${no}"size=84><br><br>
 
 					<label class="form-label" for="name">氏名</label><br>
 					<input type="text" id="name" name="name" maxlength=30 value="${name}" size=84 placeholder="氏名を入力してください" required><br><br>
