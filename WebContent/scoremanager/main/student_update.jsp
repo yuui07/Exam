@@ -17,6 +17,7 @@
 				<div class="row mx-3 my-0 mb-3 py-2 align-items-center rounded" id="filter">
 					<div class="col-lg-12">
 					<label class="form-label" for="ent-year">入学年度</label>
+					<br>
 					<input type="text" id="ent-year" value="${ent_year}" size=84 readonly><br><br>
 
 					<label class="form-label" for="no">学生番号</label><br>
