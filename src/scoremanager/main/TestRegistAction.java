@@ -93,7 +93,7 @@ public class TestRegistAction extends Action {
 
 		if (entYearStr != null && !classNum.equals("0") && subject != null && !numOfTime.equals("0")){
 		// 成績管理一覧で表示するために必要なデータを取得
-			test = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
+			test = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());//直し
 			students = ((Test) test).getStudent();
 		// 値セット
 			req.setAttribute("test_result", test);

@@ -21,6 +21,8 @@ import bean.Test;
 @WebServlet("/TestListSubjectExecuteAction")
 public class TestListSubjectExecuteAction extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+
         int entYear = Integer.parseInt(request.getParameter("entYear"));
         String classNum = request.getParameter("classNum");
         String subjectCd = request.getParameter("subjectCd");
@@ -33,8 +35,9 @@ public class TestListSubjectExecuteAction extends HttpServlet {
             request.setAttribute("tests", tests);
         }
 
-        request.getRequestDispatcher("test_list_student.jsp").forward(request, response);
+        request.getRequestDispatcher("test_list_subject.jsp").forward(request, response);
     }
+
 
     private List<Test> getTestsByDetails(int entYear, String classNum, String subjectCd) {
         List<Test> tests = new ArrayList<>();

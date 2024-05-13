@@ -22,10 +22,10 @@
             <div class="label" style="color: black; background-color: #aad4aa; text-align: center;">登録が完了しました。</div>
             <div class="d-flex justify-content-center mt-3">
                 <div class="me-3">
-                    <a href="subject_list.jsp">戻る</a>
+                    <a href="subject_create.jsp">戻る</a>
                 </div>
                 <div>
-                    <a href="subject_create.jsp">科目登録画面に戻る</a>
+                    <a href="subject_list.jsp">科目一覧</a>
                 </div>
             </div>
         </section>
