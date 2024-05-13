@@ -19,7 +19,6 @@
 	<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
 		<div class = "col-2">
 			<label class="form-label"for="student-f1-select">入学年度</label>
-				<tr>
 				<select class="form-select " id="student-f1-select" name="f1">
 					<option value="0">--------</option>
 					<c:forEach var="year" items="${ent_year_set}">
@@ -44,9 +43,9 @@
 			<label class="form-label" for="student-f2-select">科目</label>
 				<select class="form-select " id="student-f2-select" name="f2">
 					<option value="0">--------</option>
-					<c:forEach var="num" items="${subject_cd_set}">
+					<c:forEach var="num" items="${subject_set}">
              			<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
-						<option value="${subject_cd}" <c:if test="${subject_cd==f3}">selected</c:if>>${subject_cd}</option>
+						<option value="${subject.cd}" <c:if test="${subject.cd==f3}">selected</c:if>>${subject.name}</option>
 					</c:forEach>
 				</select>
 		</div>
@@ -55,7 +54,7 @@
 			<label class="form-label" for="student-f2-select">回数</label>
 				<select class="form-select " id="student-f2-select" name="f2">
 					<option value="0">--------</option>
-					<c:forEach var="num" items="${class_num_set}">
+					<c:forEach var="num" items="${num_set}">
              			<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
 						<option value="${num}" <c:if test="${num==f4}">selected</c:if>>${num}</option>
 					</c:forEach>
@@ -64,31 +63,28 @@
 		<div class = "col-2 text-center">
 		<button class = "btn btn-secondary" id = "filter-button">検索</button>
 		</div>
-
+		<div class = "mt-2 text-warning">${errors.get("all")}</div>
 	</div>
-
-
-	<div class = "mt-2 text-warning">${errors.get("f1")}</div>
 
 	</form>
 	<c:choose>
-		<c:when test = "${subject}">
-		<div>科目:${subject}</div>
+		<c:when test = "${dep == true}">
+		<div>科目:${subject_name}:(:${test_no}回)</div>
 		<table class = "table table-hover">
 				<tr>
 					<th>入学年度</th>
-					<th>クラス</th>
-					<th>学生暗号</th>
+					<th>学生番号</th>
 					<th>氏名</th>
-					<th>点数</th>
+					<th>クラス</th>
+					<th><label class="form-label" for="point">点数</label></th>
 
 				</tr>
 				<c:forEach var = "student" items = "${students}">
 					<tr>
 						<td>${student.entYear}</td>
-						<td>${student.classNum}</td>
 						<td>${student.no}</td>
 						<td>${student.name}</td>
+						<td>${student.classNum}</td>
 
 						<td class="text-center">
 							<input type="text" name="point_${studentno}" size="5"
@@ -98,10 +94,12 @@
 					</tr>
 				</c:forEach>
 			</table>
+			<div class="col-2 text-center">
+			<button class="btn btn-secondary" id="exe-button">保存して終了</button>
+			</div>
 		</c:when>
 	</c:choose>
-	<div class="col-2 text-center">
-    </div>
+
 
 	</section>
 	</c:param>
