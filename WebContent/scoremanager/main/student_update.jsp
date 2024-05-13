@@ -13,7 +13,7 @@
 
 		  <div class="col-11">
 <label class="form-label" for="student-f1-input">入学年度</label>
-<input type="text"  class="form-control" id="student-f1-input"name="f1" placeholder="入学年度を入力してください"<c:if test="${no!=null}">value="${no}"</c:if>>
+<input type="text"  class="form-control" id="student-f1-input"name="f1"placeholder="入学年度を入力してください"<c:if test="${no!=null}">value="${no}"</c:if>>
 </div>
 
 

@@ -33,7 +33,7 @@ public class TestListSubjectExecuteAction extends HttpServlet {
             request.setAttribute("tests", tests);
         }
 
-        request.getRequestDispatcher("test_list_student.jsp").forward(request, response);
+        request.getRequestDispatcher("test_list_subject.jsp").forward(request, response);
     }
 
     private List<Test> getTestsByDetails(int entYear, String classNum, String subjectCd) {
