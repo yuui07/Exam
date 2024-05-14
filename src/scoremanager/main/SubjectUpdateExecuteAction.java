@@ -1,11 +1,9 @@
 package scoremanager.main;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDao;
@@ -13,52 +11,54 @@ import tool.Action;
 
 public class SubjectUpdateExecuteAction extends Action {
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @Override
 
-		HttpSession session = request.getSession();//セッション
-		Teacher teacher = (Teacher)session.getAttribute("user");
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		//データを受け取る
-		String cd=request.getParameter("cd");
-		String name=request.getParameter("name");
-		boolean is_attend = false;
+        HttpSession session = req.getSession(); // セッション
 
-		// バリデーションチェック
-				boolean[] errors = {false};
-		        if (name == null || name.isEmpty()) {
-		            errors[2]=true;
-		        }
-		        if (errors[2] || errors[3]) {
+        Teacher teacher = (Teacher) session.getAttribute("user");
 
-		            // 入力されたデータとエラーメッセージをリクエストにセット
-		        	request.setAttribute("cd", cd);
-		            request.setAttribute("name", name);
+        String subjectCode = ""; // 入力された科目コード
 
-		            // 入力画面にフォワード
-		            RequestDispatcher dispatcher = request.getRequestDispatcher("subject_update.jsp");
-		            dispatcher.forward(request, response);
-		        }else{
-		        	boolean count = false;
-		        	School school = new School();
-		    		school = teacher.getSchool();
+        String subjectName = ""; // 入力された科目名
 
-		    		SubjectDao sDao = new SubjectDao();
+        Subject makeSubject = new Subject(); // 送信用科目情報
 
-		    		// 学生インスタンスを初期化
-		    		Subject subject = new Subject();
-		    		// 学生インスタンスに検索結果をセット
-		    		subject.setCd(cd);
-		    		subject.setName(name);
-		    		// DB更新があった場合、countにはtrueが入る
-		    		count = sDao.save(subject);
-						if(count){
-							// DB更新が完了した場合
-							request.getRequestDispatcher("subject_update_done.jsp").forward(request, response);
-						}else{
-							// DB更新がなかった場合
-							request.getRequestDispatcher("subject_update.jsp").forward(request, response);
-						}
-					}
-				}
+        SubjectDao subjectDao = new SubjectDao(); // 科目Dao
+
+        // リクエストパラメータの取得
+
+        subjectCode = req.getParameter("code");
+
+        subjectName = req.getParameter("name");
+
+        // 送信用の科目情報の作成
+
+        makeSubject.setCd(subjectCode);
+
+        makeSubject.setName(subjectName);
+
+        makeSubject.setSchool(teacher.getSchool());
+
+        // 送信
+
+        boolean success = subjectDao.save(makeSubject);
+
+        if (success) {
+
+            req.getRequestDispatcher("subject_update_done.jsp").forward(req, res);
+
+        } else {
+
+            System.out.println("★登録に失敗しました");
+
+            req.setAttribute("code", subjectCode);
+
+            req.getRequestDispatcher("SubjectUpdate.action").forward(req, res);
+
+        }
+
+    }
+
 }
