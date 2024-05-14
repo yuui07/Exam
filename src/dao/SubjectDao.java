@@ -52,12 +52,11 @@ public class SubjectDao {
     }
 
     public boolean save(Subject subject) throws SQLException {
-        String sql = "INSERT INTO Subject (SCHOOL_CD, CD, NAME) VALUES (?, ?, ?) ON CONFLICT (CD, SCHOOL_CD) DO UPDATE SET NAME = ?";
+        String sql = "INSERT INTO Subject (SCHOOL_CD, CD, NAME) VALUES (?, ?, ?)SET NAME = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, subject.getSchool().getCd());
             stmt.setString(2, subject.getCd());
             stmt.setString(3, subject.getName());
-            stmt.setString(4, subject.getName());
             return stmt.executeUpdate() > 0;
         }
     }

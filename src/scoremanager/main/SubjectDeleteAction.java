@@ -1,37 +1,51 @@
 package scoremanager.main;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDao;
 import tool.Action;
 
-public class SubjectDeleteAction extends Action {
+public class SubjectDeleteAction extends Action{
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();//セッション
-		Teacher teacher = (Teacher)session.getAttribute("user");
 
-		String cd = request.getParameter("cd");
+	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		List<Subject> subjects=null;//科目リスト
-		SubjectDao sDao = new SubjectDao();//科目Dao
-		School school = teacher.getSchool();
+		HttpSession session = req.getSession(); // セッション
 
+		Teacher teacher =(Teacher)session.getAttribute("user");
 
-		Subject subject = sDao.get(cd, school);
-		System.out.println(cd);
+		String subjectNo=""; //送付された科目番号の受け取り先
 
+		Subject thisSubject = new Subject();
 
-		request.setAttribute("subject", subject);
+		SubjectDao subDao = new SubjectDao();
 
-		request.getRequestDispatcher("subject_delete.jsp").forward(request, response);
+		// リクエストパラメータの取得
+
+		subjectNo=req.getParameter("no");
+
+		// 科目情報取得
+
+		thisSubject=subDao.get(subjectNo, teacher.getSchool());
+
+		// リクエストパラメータのセット
+
+		req.setAttribute("selected_subject_name", thisSubject.getName());
+
+		req.setAttribute("selected_subject_code", thisSubject.getCd());
+
+		// フォワード
+
+		req.getRequestDispatcher("subject_delete.jsp").forward(req, res);
+
 	}
+
 }
+
+
+
