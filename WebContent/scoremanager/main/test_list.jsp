@@ -54,7 +54,7 @@
 		<div class = "col-2 text-center">
 		<button class = "btn btn-secondary" id = "filter-button">検索</button>
 		</div>
-<<<<<<< HEAD
+
 		<br>
 		<div class = "col-2">
 			<div>学生情報</div>
@@ -67,14 +67,6 @@
                placeholder="学生番号を入力してください" required>
                <button class = "btn btn-secondary" id = "filter-button">検索</button>
 		</div>
-=======
-		<p>学生情報</p>
-		<div>
-    		<label for="f4">学生番号:</label>
-    		<input type="text" id="f4" name="f4" placeholder="学生番号を入力してください" maxlength="10" required />
-		</div>
-		<button type="button" onclick="searchStudent()">検索</button>
->>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
 	</div>
 
 	<label></label>
