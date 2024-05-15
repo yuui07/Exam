@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>科目一覧</title>
 </head>
 <body>
 <c:import url="/common/base.jsp">
