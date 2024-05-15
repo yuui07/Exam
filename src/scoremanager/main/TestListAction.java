@@ -79,7 +79,7 @@ public class TestListAction extends Action {
 
         if (!errors.isEmpty()) { // エラーチェック
             request.setAttribute("errors", errors);
-            request.getRequestDispatcher("test_regist.jsp").forward(request, response);
+            request.getRequestDispatcher("test_list.jsp").forward(request, response);
             return;
         }
 
@@ -107,7 +107,7 @@ public class TestListAction extends Action {
 
         if (!errors.isEmpty()) {
             request.setAttribute("errors", errors);
-            request.getRequestDispatcher("test_regist.jsp").forward(request, response);
+            request.getRequestDispatcher("test_list.jsp").forward(request, response);
             return;
         }
 
@@ -133,6 +133,6 @@ public class TestListAction extends Action {
         request.setAttribute("f3", subjects);
         request.setAttribute("f4", counts);
 
-        request.getRequestDispatcher("test_regist.jsp").forward(request, response);
+        request.getRequestDispatcher("test_list.jsp").forward(request, response);
     }
 }
