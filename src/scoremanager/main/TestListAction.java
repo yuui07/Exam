@@ -26,6 +26,34 @@ public class TestListAction extends Action {
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
 
+
+        LocalDate todaysDate = LocalDate.now(); //LocalDateインスタンス取得
+		int year =todaysDate.getYear(); // 現在の年を取得
+		ClassNumDao cNumDao = new ClassNumDao(); // クラス番号Dao
+		SubjectDao subjectDao = new SubjectDao(); //科目Dao
+
+		List<String> list=cNumDao.filter(teacher.getSchool());
+		List<Subject> subjectList=subjectDao.filter(teacher.getSchool());
+		List<Student> studentNoList=StudentDao.filter()
+
+		List<Integer> numSet= new ArrayList<>();
+		for (int i = 1; i < 101; i++){
+			numSet.add(i);
+		}
+		// リストを初期化
+		List<Integer> entYearSet=new ArrayList<>();
+		// 10年前から1年後までの年をリストに追加
+		for (int i = year-10;i<year+1;i++){
+			entYearSet.add(i);
+		}
+
+
+		request.setAttribute("class_num_set", list);
+		request.setAttribute("ent_year_set", entYearSet);
+		request.setAttribute("subject_set", subjectList);
+		request.setAttribute("student_no_set", sNumSet);
+
+
         String entYearStr = "";
         String classNum = ""; // 入力されたクラス番号
         String isAttendStr = "";
