@@ -58,14 +58,13 @@
 		<div class = "col-2">
 			<div>学生情報</div>
 		</div>
-		
+
 		<div class = "col-2">
 			<label class="form-label" for="student-f1-select">学生番号</label>
-				
-				<input type="text" id="student-f4-text" name="f4" maxlength="10" class="input-field"
+
+				<input type="text" id="student-f4-text" name="f4" maxlength="10" class="form-input"
                placeholder="学生番号を入力してください" required>
-		</div>
-		<button type="button" onclick="searchStudent()">検索</button>
+               <button class = "btn btn-secondary" id = "filter-button">検索</button>
 		</div>
 	</div>
 

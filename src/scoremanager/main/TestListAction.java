@@ -48,6 +48,7 @@ public class TestListAction extends Action {
         classNum = request.getParameter("f2");
         subjectStr = request.getParameter("f3");
         numStr = request.getParameter("f4");
+        isAttend = Boolean.parseBoolean(isAttendStr);
 
         // subjectStr が null または空文字でないかを確認
         if (subjectStr != null && !subjectStr.trim().isEmpty()) {
