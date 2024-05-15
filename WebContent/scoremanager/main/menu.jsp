@@ -21,11 +21,7 @@
 					style="height: 10rem; background-color: #bdb;">
 					<div>
 						<div class="">
-<<<<<<< HEAD
 						<p>成績管理</p>
-=======
-						成績管理
->>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
 						</div>
 						<div class="">
 							<a href="TestRegist.action">成績登録</a>
