@@ -21,7 +21,7 @@
 					style="height: 10rem; background-color: #bdb;">
 					<div>
 						<div class="">
-						<a href="TestList.action">成績管理</a>
+						<p>成績管理</p>
 						</div>
 						<div class="">
 							<a href="TestRegist.action">成績登録</a>
