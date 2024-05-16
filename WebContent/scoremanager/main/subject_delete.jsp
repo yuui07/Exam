@@ -40,5 +40,3 @@
 </section>
 </c:param>
 </c:import>
-
-コンテキスト メニューあり
