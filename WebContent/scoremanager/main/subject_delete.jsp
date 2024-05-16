@@ -12,24 +12,17 @@
 </body>
 </html>
 <c:import url="/common/base.jsp">
-<<<<<<< HEAD
     <c:param name="title">
 
-=======
 <c:param name="title">
->>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
         得点管理システム
-<<<<<<< HEAD
 
     </c:param>
     <c:param name="scripts"></c:param>
-=======
 </c:param>
 <c:param name="scripts"></c:param>
 
->>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
     <c:param name="content">
-<<<<<<< HEAD
         <section class="me-4">
             <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報削除</h2>
             <form action="SubjectDeleteExecute.action" method="get">
@@ -50,7 +43,6 @@
         </section>
     </c:param>
 </c:import>
-=======
 <section class="me-4">
 <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4"style="background-color: #f2f2f2; padding: 10px;">科目情報削除</h2>
 <form action="SubjectDeleteExecute.action" method="get">
@@ -68,6 +60,3 @@
 </div>
 </form>
 </section>
-</c:param>
-</c:import>
->>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
