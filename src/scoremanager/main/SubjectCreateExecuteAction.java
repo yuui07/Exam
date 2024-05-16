@@ -65,7 +65,7 @@ public class SubjectCreateExecuteAction extends Action {
             boolean end = sDao.save(makeSubject);
 
             if (end) {
-                req.getRequestDispatcher("student_create_done.jsp").forward(req, res);
+                req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
             } else {
                 System.out.println("★登録に失敗しました");
                 req.setAttribute("no", subjectCd);
