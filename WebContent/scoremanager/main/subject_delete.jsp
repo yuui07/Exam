@@ -28,7 +28,7 @@
 <div class="col-16">
 <!-- 確認メッセージ -->
 <label for="confirmation-message"></label>
-<p id="confirmation-message">${selected_subject_name}  ${selected_subject_code} を削除してもよろしいですか？？</p>
+<p id="confirmation-message">「${selected_subject_name}  (${selected_subject_code})」 を削除してもよろしいですか？？</p>
 </div>
 <div class="col-2 text-center col-1 mt-3">
 <!-- btn-danger クラスを追加 -->
