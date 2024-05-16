@@ -1,6 +1,5 @@
 package scoremanager.main;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +23,8 @@ public class StudentUpdateAction extends Action {
 		Teacher teacher = (Teacher)session.getAttribute("user");
 		String no="";
 		String entYear="";
-		LocalDate todaysDate = LocalDate.now();	// LocalDateインスタンスを取得
-		int year = todaysDate.getYear();	// 現在の年を取得
 		ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
-		entYear=req.getParameter("entYear");
+		entYear=req.getParameter("ent-year");
 		no=req.getParameter("no");
 
 
@@ -45,8 +42,8 @@ public class StudentUpdateAction extends Action {
 		req.setAttribute("class_num_set", list);//↓↓↓  同じく  ↓↓↓
 
 		req.setAttribute("no", no);	// リクエストにデータをセット
-		req.setAttribute("entYear", entYear);//↓↓↓  同じく  ↓↓↓
-		req.setAttribute("class_num_set", list);//↓↓↓  同じく  ↓↓↓
+		req.setAttribute("ent-year", entYear);//↓↓↓  同じく  ↓↓↓
+		req.setAttribute("class_num", list);//↓↓↓  同じく  ↓↓↓
 
 		//JSPへフォワード 7
 
