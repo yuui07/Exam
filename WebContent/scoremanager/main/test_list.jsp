@@ -24,7 +24,7 @@
 				<select class="form-select " id="student-f1-select" name="f1">
 					<option value="0">--------</option>
 					<c:forEach var="num" items="${class_num_set}">
-             			<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
+             			<%-- 現在のnumと選択されていたf1が一致していた場合selectedを追記 --%>
 						<option value="${subject_cd}" <c:if test="${subject_cd==f3}">selected</c:if>>${subject_cd}</option>
 					</c:forEach>
 				</select>
@@ -42,11 +42,22 @@
 		</div>
 
 		<div class = "col-4">
-			<label class="form-label" for="student-f2-select">科目</label>
-				<select class="form-select " id="student-f2-select" name="f2">
+			<label class="form-label" for="student-f3-select">科目</label>
+				<select class="form-select " id="student-f3-select" name="f3">
 					<option value="0">--------</option>
 					<c:forEach var="num" items="${class_num_set}">
-             			<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
+             			<%-- 現在のnumと選択されていたf3が一致していた場合selectedを追記 --%>
+						<option value="${num}" <c:if test="${num==f4}">selected</c:if>>${num}</option>
+					</c:forEach>
+				</select>
+		</div>
+
+		<div class = "col-4">
+			<label class="form-label" for="student-f3-select">科目</label>
+				<select class="form-select " id="student-f3-select" name="f3">
+					<option value="0">--------</option>
+					<c:forEach var="num" items="${class_num_set}">
+             			<%-- 現在のnumと選択されていたf3が一致していた場合selectedを追記 --%>
 						<option value="${num}" <c:if test="${num==f4}">selected</c:if>>${num}</option>
 					</c:forEach>
 				</select>
@@ -54,12 +65,19 @@
 		<div class = "col-2 text-center">
 		<button class = "btn btn-secondary" id = "filter-button">検索</button>
 		</div>
-		<p>学生情報</p>
-		<div>
-    		<label for="f4">学生番号:</label>
-    		<input type="text" id="f4" name="f4" placeholder="学生番号を入力してください" maxlength="10" required />
+		<br>
+		<div class = "col-2">
+			<div>学生情報</div>
+		</div>
+
+		<div class = "col-2">
+			<label class="form-label" for="student-f1-select">学生番号</label>
+
+				<input type="text" id="student-f4-text" name="f4" maxlength="10" class="input-field"
+               placeholder="学生番号を入力してください" required>
 		</div>
 		<button type="button" onclick="searchStudent()">検索</button>
+		</div>
 	</div>
 
 	<label></label>
@@ -73,35 +91,35 @@
 	<div class = "mt-2 text-warning">${errors.get("f1")}</div>
 
 	</form>
-	<c:choose>
-		<c:when test = "${subject}">
-		<div>科目:${subject}</div>
-		<table class = "table table-hover">
+<c:choose>
+	<c:when test="${subject}">
+		<div>科目: ${subject.name}</div>
+		<table class="table table-hover">
+			<tr>
+				<th>入学年度</th>
+				<th>クラス</th>
+				<th>学生番号</th>
+				<th>氏名</th>
+				<th>点数</th>
+			</tr>
+			<c:forEach var="test" items="${tests}"> <!-- ここでTestオブジェクトのリストをループ -->
 				<tr>
-					<th>入学年度</th>
-					<th>クラス</th>
-					<th>学生暗号</th>
-					<th>氏名</th>
-					<th>点数</th>
-
+					<td>${test.student.entYear}</td>
+					<td>${test.student.classNum}</td>
+					<td>${test.student.no}</td>
+					<td>${test.student.name}</td>
+					<td class="text-center">
+						<input type="text" name="point_${test.student.no}" size="5"
+							value="${test.point}" placeholder="0-100" onblur="validateScore(this)">
+						<span class="error" id="error_${test.student.no}" style="color: red; display: none;">点数は0から100の間で入力してください。</span>
+					</td>
 				</tr>
-				<c:forEach var = "student" items = "${students}">
-					<tr>
-						<td>${student.entYear}</td>
-						<td>${student.classNum}</td>
-						<td>${student.no}</td>
-						<td>${student.name}</td>
+			</c:forEach>
+		</table>
+	</c:when>
+</c:choose>
 
-						<td class="text-center">
-							<input type="text" name="point_${studentno}" size="5"
-								value="${student.score}" placeholder="0-100" onblur="validateScore(this)">
-							<span class="error" id="error_${student.no}" style="color: red; display: none;">点数は0から100の間で入力してください。</span>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</c:when>
-	</c:choose>
+
 	<div class="col-2 text-center">
     <button class="btn btn-secondary" id="filter-button" onclick="test_regist_done.jsp">登録して終了</button>
     </div>

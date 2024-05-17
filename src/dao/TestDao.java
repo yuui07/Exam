@@ -1,6 +1,5 @@
 package dao;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,10 +13,10 @@ import bean.Student;
 import bean.Subject;
 import bean.Test;
 
-public class TestDao extends Dao{
+public class TestDao extends Dao {
     private String baseSql = "SELECT * FROM TEST";
 
-    public Test get(Student student, Subject subject, School school, int no) throws Exception{
+    public Test get(Student student, Subject subject, School school, int no) throws Exception {
         Test test = null;
         try (Connection conn = DriverManager.getConnection("jdbc:h2:~/exam", "sa", "");
              PreparedStatement stmt = conn.prepareStatement(baseSql + " WHERE STUDENT_NO = ? AND SUBJECT_CD = ? AND SCHOOL_CD = ? AND NO = ?")) {
@@ -44,38 +43,35 @@ public class TestDao extends Dao{
         return test;
     }
 
-    private List<Test> postFilter(ResultSet rs, School school) throws Exception{
-        List<Test> students = new ArrayList<>();
+    private List<Test> postFilter(ResultSet rs, School school) throws Exception {
+        List<Test> tests = new ArrayList<>();
         StudentDao stuDao = new StudentDao();
         SubjectDao subDao = new SubjectDao();
 
         try {
             while (rs.next()) {
-            	Test test = new Test();
-            	test.setStudent(stuDao.get(rs.getString("student_no")));
-            	test.setSubject(subDao.get(rs.getString("subject_cd"),school));
+                Test test = new Test();
+                test.setStudent(stuDao.get(rs.getString("student_no")));
+                test.setSubject(subDao.get(rs.getString("subject_cd"), school));
                 test.setSchool(school);
                 test.setNo(rs.getInt("no"));
                 test.setPoint(rs.getInt("point"));
                 test.setClassNum(rs.getString("class_num"));
 
-                students.add(test);
+                tests.add(test);
             }
-        } catch (SQLException | NullPointerException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return students;
+        return tests;
     }
 
-    public List<Test> filter(int entYear, String classNum, Subject subject, int num, School school)throws Exception {
-        List<Test> students = new ArrayList<>();
-        String order = "order by student_no asc" ;
-        Connection connection = getConnection();
-        PreparedStatement stmt = null;
-        try {
-        	Connection conn = DriverManager.getConnection("jdbc:h2:~/exam", "sa", "");
-            stmt=connection.prepareStatement(baseSql + " WHERE STUDENT_NO IN (SELECT NO FROM STUDENT WHERE ENT_YEAR=? AND CLASS_NUM = ?) AND SUBJECT_CD = ? AND SCHOOL_CD = ?"+order);
-
+    public List<Test> filter(int entYear, String classNum, Subject subject, int num, School school) throws Exception {
+        List<Test> tests = new ArrayList<>();
+        String order = "ORDER BY student_no ASC";
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement(baseSql +
+                 " WHERE STUDENT_NO IN (SELECT NO FROM STUDENT WHERE ENT_YEAR=? AND CLASS_NUM = ?) AND SUBJECT_CD = ? AND SCHOOL_CD = ?" + order)) {
 
             stmt.setInt(1, entYear);
             stmt.setString(2, classNum);
@@ -83,15 +79,14 @@ public class TestDao extends Dao{
             stmt.setString(4, school.getCd());
 
             ResultSet rs = stmt.executeQuery();
-
-            students = postFilter(rs, school);
+            tests = postFilter(rs, school);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return students;
+        return tests;
     }
 
-    public boolean save(List<Test> list) throws Exception{
+    public boolean save(List<Test> list) throws Exception {
         try (Connection conn = DriverManager.getConnection("jdbc:h2:~/exam", "sa", "")) {
             for (Test test : list) {
                 if (!save(test, conn)) {
@@ -105,8 +100,11 @@ public class TestDao extends Dao{
         }
     }
 
-    private boolean save(Test test, Connection conn) throws Exception{
-        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO TEST (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)")) {
+    private boolean save(Test test, Connection conn) throws Exception {
+        String sql = "MERGE INTO TEST KEY (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO) " +
+                     "VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, test.getStudent().getNo());
             stmt.setString(2, test.getSubject().getCd());
             stmt.setString(3, test.getSchool().getCd());
@@ -121,7 +119,7 @@ public class TestDao extends Dao{
         }
     }
 
-    public boolean delete(List<Test> list) throws Exception{
+    public boolean delete(List<Test> list) throws Exception {
         try (Connection conn = DriverManager.getConnection("jdbc:h2:~/exam", "sa", "")) {
             for (Test test : list) {
                 if (!delete(test, conn)) {
@@ -135,7 +133,7 @@ public class TestDao extends Dao{
         }
     }
 
-    private boolean delete(Test test, Connection conn) throws Exception{
+    private boolean delete(Test test, Connection conn) throws Exception {
         try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM TEST WHERE NO = ?")) {
             stmt.setInt(1, test.getNo());
             int affectedRows = stmt.executeUpdate();
@@ -146,4 +144,3 @@ public class TestDao extends Dao{
         }
     }
 }
-//a
