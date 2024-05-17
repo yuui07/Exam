@@ -24,12 +24,17 @@ public class StudentUpdateAction extends Action {
 		Teacher teacher = (Teacher)session.getAttribute("user");
 		String no="";
 		String entYear="";
+
+		String name = "";
+
 		LocalDate todaysDate = LocalDate.now();	// LocalDateインスタンスを取得
 		int year = todaysDate.getYear();	// 現在の年を取得
 		ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
-		entYear=req.getParameter("entYear");
-		no=req.getParameter("no");
 
+		entYear=req.getParameter("entyear");
+
+		no=req.getParameter("no");
+		name = req.getParameter("name");
 
 
 		//DBへデータ保存 5
@@ -40,13 +45,16 @@ public class StudentUpdateAction extends Action {
 		System.out.println("aaaa");
 		System.out.println(no);
 		System.out.println(entYear);
-		System.out.println("aaaa");
+		System.out.println(name);
 		List<String> list = cNumDao.filter(teacher.getSchool());
-		req.setAttribute("class_num_set", list);//↓↓↓  同じく  ↓↓↓
+		req.setAttribute("class_num", list);//↓↓↓  同じく  ↓↓↓
 
 		req.setAttribute("no", no);	// リクエストにデータをセット
-		req.setAttribute("entYear", entYear);//↓↓↓  同じく  ↓↓↓
-		req.setAttribute("class_num_set", list);//↓↓↓  同じく  ↓↓↓
+
+		req.setAttribute("entyear", entYear);//↓↓↓  同じく  ↓↓↓
+		req.setAttribute("name", name);//↓↓↓  同じく  ↓↓↓a
+
+
 
 		//JSPへフォワード 7
 

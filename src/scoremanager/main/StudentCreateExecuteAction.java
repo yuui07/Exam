@@ -23,6 +23,7 @@ public class StudentCreateExecuteAction extends Action {
 		String no="";
 		String name="";
 		String classNum="";//入力されたクラス番号
+		String isAttendStr="";//入力された在学フラグ
 		int entYear=0;//入学年度
 		boolean isAttend=false;//在学フラグ
 
@@ -79,19 +80,3 @@ public class StudentCreateExecuteAction extends Action {
 	}
 
 }
-
-		//在学フラグが送信されていた場合
-//		if (isAttendStr!=null){
-//			//在学フラグを立てる
-//			isAttend=true;
-//			//リクエストに在学フラグをセット
-//			request.setAttribute("f3",isAttendStr);
-//		}
-		//リクエストに学生リストをセット
-//		request.setAttribute("students",students);
-//		//リクエストにデータをセット
-//		request.setAttribute("class_num_set",list);
-//		request.setAttribute("ent_year_set",entYearSet);
-//
-//		//JSPにフォワード 7
-//		request.getRequestDispatcher("student_list.jsp").forward(request,response);

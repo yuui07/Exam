@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Student;
 import bean.Teacher;
 import dao.ClassNumDao;
 import dao.StudentDao;
@@ -35,13 +34,18 @@ public class StudentUpdateExecuteAction extends Action {
 		StudentDao sDao=new StudentDao();//学生dao
 		Map<String, String>errors=new HashMap<>();//エラーメッセージ
 
-		entYearStr=request.getParameter("f1");//入学年度
-		no=request.getParameter("f2");//学生番号
-		name=request.getParameter("f3");//氏名
-		classNum=request.getParameter("f4");//クラス
-		isAttend = "t".equals(request.getParameter("f5")); // チェックボックスの値が "t" の場合に true を設定する
+
+		entYearStr=request.getParameter("entyear");//入学年度
+		no=request.getParameter("no");//学生番号
+		name=request.getParameter("name");//氏名
+		classNum=request.getParameter("class_num");//クラス
+		isAttend = "t".equals(request.getParameter("f5"));
+		if (entYearStr!=null){
+			//数値に変換
+			entYear=Integer.parseInt(entYearStr);
+		}
 		System.out.println("---------------------");
-		System.out.println(entYearStr);
+		System.out.println(entYear);
 		System.out.println(no);
 		System.out.println(name);
 		System.out.println(classNum);
@@ -53,41 +57,37 @@ public class StudentUpdateExecuteAction extends Action {
 
 		if (name.isEmpty()){
 
-			errors.put("f3", "氏名を選択してください");
+			errors.put("name", "氏名を選択してください");
 			request.setAttribute("no", no);
-			request.setAttribute("entYear", entYearStr);
+			request.setAttribute("entyear", entYearStr);
 			request.setAttribute("name", name);
 			request.setAttribute("errors", errors);
 			ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
 			List<String> list = cNumDao.filter(teacher.getSchool());
-			request.setAttribute("class_num_set", list);//↓↓↓  同じく  ↓↓↓
+			request.setAttribute("class_num", list);//↓↓↓  同じく  ↓↓↓
 			request.getRequestDispatcher("student_update.jsp").forward(request, response);
 
-		}else if (classNum.equals("0")){
+		}else if (classNum.equals("class_num")){
 
-			errors.put("f4", "クラスを入力してください");
+			errors.put("class_num", "クラスを入力してください");
 			request.setAttribute("no", no);
-			request.setAttribute("entYear", entYearStr);
+			request.setAttribute("year", entYearStr);
 			request.setAttribute("name", name);
 			ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
 			List<String> list = cNumDao.filter(teacher.getSchool());
-			request.setAttribute("class_num_set", list);//↓↓↓  同じく  ↓↓↓
+			request.setAttribute("class_num", list);//↓↓↓  同じく  ↓↓↓
 			request.getRequestDispatcher("student_update.jsp").forward(request, response);
 
 		}else {
-			    Student student = new Student();
-		        student.setNo(no);
-		        student.setName(name);
-		        student.setEntYear(entYear);//ここ？
-		        student.setClassNum(classNum);
-		        student.setAttend(isAttend);
-		        student.setSchool(teacher.getSchool()); // 学校情報をセット
-
-		        // StudentDaoを使って学生情報をデータベースに保存
-		        sDao.save(student);
+			ClassNumDao cNumDao = new ClassNumDao();
+			List<String> list = cNumDao.filter(teacher.getSchool());
+			request.setAttribute("no", no);
+			request.setAttribute("year", entYearStr);
+			request.setAttribute("name", name);
+			request.setAttribute("class_num", list);
 		    request.getRequestDispatcher("student_update_done.jsp").forward(request, response);
-		}
 
+		}
 
 	}
 }
