@@ -1,4 +1,4 @@
-package scoremanager.main;
+package scoremanager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
