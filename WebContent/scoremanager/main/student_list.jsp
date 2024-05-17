@@ -58,8 +58,8 @@
 					<tr>
 						<th>入学年度</th>
 						<th>学生番号</th>
-						<th>名前</th>
-						<th class="text-center">クラス</th>
+						<th>クラス</th>
+						<th class="text-center">在学中</th>
 						<th></th>
 						<th></th>
 					</tr>

@@ -1,5 +1,6 @@
 package scoremanager.main;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +24,18 @@ public class StudentUpdateAction extends Action {
 		Teacher teacher = (Teacher)session.getAttribute("user");
 		String no="";
 		String entYear="";
+<<<<<<< HEAD
 		String name = "";
+=======
+		LocalDate todaysDate = LocalDate.now();	// LocalDateインスタンスを取得
+		int year = todaysDate.getYear();	// 現在の年を取得
+>>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
 		ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
+<<<<<<< HEAD
 		entYear=req.getParameter("entyear");
+=======
+		entYear=req.getParameter("entYear");
+>>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
 		no=req.getParameter("no");
 		name = req.getParameter("name");
 
@@ -43,8 +53,13 @@ public class StudentUpdateAction extends Action {
 		req.setAttribute("class_num", list);//↓↓↓  同じく  ↓↓↓
 
 		req.setAttribute("no", no);	// リクエストにデータをセット
+<<<<<<< HEAD
 		req.setAttribute("entyear", entYear);//↓↓↓  同じく  ↓↓↓
 		req.setAttribute("name", name);//↓↓↓  同じく  ↓↓↓
+=======
+		req.setAttribute("entYear", entYear);//↓↓↓  同じく  ↓↓↓
+		req.setAttribute("class_num_set", list);//↓↓↓  同じく  ↓↓↓
+>>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
 
 		//JSPへフォワード 7
 

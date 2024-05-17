@@ -27,6 +27,8 @@ public class StudentCreateExecuteAction extends Action {
 
 		//List<Student>students=null;//学生リスト
 
+		LocalDate todaysDate=LocalDate.now();//LocolDateインスタンスを取得
+		int year=todaysDate.getYear();//現在の年を取得
 		StudentDao sDao=new StudentDao();//学生dao
 		Map<String, String>errors=new HashMap<>();//エラーメッセージ
 

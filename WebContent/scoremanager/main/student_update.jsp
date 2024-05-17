@@ -13,22 +13,19 @@
 		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報変更</h2>
 
-			<form action="StudentUpdateExecute.action" method="post">
+			<form action="StudentCreate.action" method="post">
 				<div class="row mx-3 my-0 mb-3 py-2 align-items-center rounded" id="filter">
 					<div class="col-lg-12">
-
 					<label class="form-label" for="ent-year">入学年度</label>
 					<br>
+<<<<<<< HEAD
 					<input type="text" id="ent-year" value="${entyear}" size=84><br><br>
+=======
+					<input type="text" id="ent-year" value="${ent_year}" size=84><br><br>
+>>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
 
-
-
-					<label class="form-label" for="no">学生番号</label>
-					<br>
+					<label class="form-label" for="no">学生番号</label><br>
 					<input type="text" id="no" value="${no}"size=84><br><br>
-
-
-
 
 					<label class="form-label" for="name">氏名</label><br>
 					<input type="text" id="name" name="name" maxlength=30 value="${name}" size=84 placeholder="氏名を入力してください" required><br><br>
@@ -43,7 +40,7 @@
 
 					在学中<input type="checkbox" name="si_attend"><br><br>
 					<button type="submit">変更</button><br><br>
-					<a href="StudentList.action">戻る</a>
+					<a href="student_management.jsp">戻る</a>
 					</div>
 				</div>
     		</form>

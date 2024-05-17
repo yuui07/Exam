@@ -54,19 +54,12 @@
 		<div class = "col-2 text-center">
 		<button class = "btn btn-secondary" id = "filter-button">検索</button>
 		</div>
-
-		<br>
-		<div class = "col-2">
-			<div>学生情報</div>
+		<p>学生情報</p>
+		<div>
+    		<label for="f4">学生番号:</label>
+    		<input type="text" id="f4" name="f4" placeholder="学生番号を入力してください" maxlength="10" required />
 		</div>
-
-		<div class = "col-2">
-			<label class="form-label" for="student-f1-select">学生番号</label>
-
-				<input type="text" id="student-f4-text" name="f4" maxlength="10" class="form-input"
-               placeholder="学生番号を入力してください" required>
-               <button class = "btn btn-secondary" id = "filter-button">検索</button>
-		</div>
+		<button type="button" onclick="searchStudent()">検索</button>
 	</div>
 
 	<label></label>

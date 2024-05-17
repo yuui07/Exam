@@ -1,4 +1,5 @@
 package scoremanager.main;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,14 +25,17 @@ public class StudentUpdateExecuteAction extends Action {
 		String no="";
 		String name="";
 		String classNum="";//入力されたクラス番号
-		int entYear= 0;//入学年度
+		int entYear=0;//入学年度
 		boolean isAttend=false;//在学フラグ
 
 		//List<Student>students=null;//学生リスト
 
+		LocalDate todaysDate=LocalDate.now();//LocolDateインスタンスを取得
+		int year=todaysDate.getYear();//現在の年を取得
 		StudentDao sDao=new StudentDao();//学生dao
 		Map<String, String>errors=new HashMap<>();//エラーメッセージ
 
+<<<<<<< HEAD
 		entYearStr=request.getParameter("entyear");//入学年度
 		no=request.getParameter("no");//学生番号
 		name=request.getParameter("name");//氏名
@@ -41,19 +45,29 @@ public class StudentUpdateExecuteAction extends Action {
 			//数値に変換
 			entYear=Integer.parseInt(entYearStr);
 		}// チェックボックスの値が "t" の場合に true を設定する
+=======
+		entYearStr=request.getParameter("f1");//入学年度
+		no=request.getParameter("f2");//学生番号
+		name=request.getParameter("f3");//氏名
+		classNum=request.getParameter("f4");//クラス
+		isAttend = "t".equals(request.getParameter("f5")); // チェックボックスの値が "t" の場合に true を設定する
+>>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
 		System.out.println("---------------------");
 		System.out.println(entYear);
 		System.out.println(no);
 		System.out.println(name);
 		System.out.println(classNum);
 		System.out.println("---------------------");
-
+		if (entYearStr!=null){
+			//数値に変換
+			entYear=Integer.parseInt(entYearStr);
+		}
 
 		if (name.isEmpty()){
 
-			errors.put("name", "氏名を選択してください");
+			errors.put("f3", "氏名を選択してください");
 			request.setAttribute("no", no);
-			request.setAttribute("ent-year", entYearStr);
+			request.setAttribute("entYear", entYearStr);
 			request.setAttribute("name", name);
 			request.setAttribute("errors", errors);
 			ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
@@ -63,9 +77,9 @@ public class StudentUpdateExecuteAction extends Action {
 
 		}else if (classNum.equals("0")){
 
-			errors.put("class_num", "クラスを入力してください");
+			errors.put("f4", "クラスを入力してください");
 			request.setAttribute("no", no);
-			request.setAttribute("ent-year", entYearStr);
+			request.setAttribute("entYear", entYearStr);
 			request.setAttribute("name", name);
 			ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
 			List<String> list = cNumDao.filter(teacher.getSchool());
