@@ -119,10 +119,24 @@
 	</c:when>
 </c:choose>
 
+<<<<<<< HEAD
 
 	<div class="col-2 text-center">
     <button class="btn btn-secondary" id="filter-button" onclick="test_regist_done.jsp">登録して終了</button>
     </div>
+=======
+						<td class="text-center">
+							<input type="text" name="point_${studentno}" size="5"
+								value="${student.score}" placeholder="0-100" onblur="validateScore(this)">
+							<span class="error" id="error_${student.no}" style="color: red; display: none;">点数は0から100の間で入力してください。</span>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:when>
+	</c:choose>
+
+>>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
 
 	</section>
 	</c:param>
