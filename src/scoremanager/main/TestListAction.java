@@ -26,12 +26,19 @@ public class TestListAction extends Action {
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
 
+<<<<<<< HEAD
         String entYearStr = request.getParameter("f1");
         String classNum = request.getParameter("f2");
         String subjectStr = request.getParameter("f3");
         String numStr = request.getParameter("f4");
         String isAttendStr = request.getParameter("f5");
 
+=======
+        String entYearStr = "";
+        String classNum = ""; // 入力されたクラス番号
+        String isAttendStr = "";
+        String numStr = "";
+>>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
         int entYear = 0;
         int num = 0;
         boolean isAttend = false;
@@ -44,8 +51,15 @@ public class TestListAction extends Action {
         TestDao tDao = new TestDao();
         SubjectDao subDao = new SubjectDao();
 
+<<<<<<< HEAD
         Map<String, String> errors = new HashMap<>();
         Subject subject = null;
+=======
+        entYearStr = request.getParameter("f1");
+        classNum = request.getParameter("f2");
+        subjectStr = request.getParameter("f3");
+        numStr = request.getParameter("f4");
+>>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
 
         // 入学年度のバリデーション
         if (entYearStr != null && !entYearStr.trim().isEmpty()) {
@@ -65,9 +79,16 @@ public class TestListAction extends Action {
             }
         }
 
+<<<<<<< HEAD
         // 在学フラグのバリデーション
         if (isAttendStr != null && !isAttendStr.trim().isEmpty()) {
             isAttend = Boolean.parseBoolean(isAttendStr);
+=======
+        if (!errors.isEmpty()) { // エラーチェック
+            request.setAttribute("errors", errors);
+            request.getRequestDispatcher("test_regist.jsp").forward(request, response);
+            return;
+>>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
         }
 
         // 科目のバリデーション
@@ -83,7 +104,7 @@ public class TestListAction extends Action {
         // エラーチェック
         if (!errors.isEmpty()) {
             request.setAttribute("errors", errors);
-            request.getRequestDispatcher("test_list.jsp").forward(request, response);
+            request.getRequestDispatcher("test_regist.jsp").forward(request, response);
             return;
         }
 
@@ -127,7 +148,14 @@ public class TestListAction extends Action {
         request.setAttribute("ent_year_set", entYearSet);
         request.setAttribute("num_set", numSet);
 
+<<<<<<< HEAD
         // フォワード
         request.getRequestDispatcher("test_list.jsp").forward(request, response);
+=======
+        request.setAttribute("f3", subjects);
+        request.setAttribute("f4", counts);
+
+        request.getRequestDispatcher("test_regist.jsp").forward(request, response);
+>>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
     }
 }
