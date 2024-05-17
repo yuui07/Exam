@@ -1,7 +1,7 @@
-<%--成績参照検索画面JSP--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%-- 共通のベースJSPをインポート --%>
 <c:import url="/common/base.jsp">
     <c:param name="title">得点管理システム</c:param>
     <c:param name="scripts"></c:param>
@@ -10,6 +10,7 @@
             <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">成績参照</h2>
             <form method="get">
                 <div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
+                    <!-- 1行目：科目情報 -->
                     <div class="col-2">
                         <div>科目情報</div>
                     </div>
@@ -43,9 +44,24 @@
                     <div class="col-2 text-center">
                         <button class="btn btn-secondary" id="filter-button">検索</button>
                     </div>
+
+                    <!-- 2行目：学生情報 -->
+                    <div class="col-2 mt-3">
+                        <div>学生情報</div>
+                    </div>
+                    <div class="col-8 mt-3">
+                        <label class="form-label" for="student-number-input">学生番号</label>
+                        <input type="text" class="form-control" id="student-number-input" name="student_number"
+                               value="${student_number}" placeholder="学生番号を入力してください">
+                    </div>
+                    <div class="col-2 text-center mt-3">
+                        <button class="btn btn-secondary" id="filter-button">検索</button>
+                    </div>
                 </div>
                 <div class="mt-2 text-warning">${errors.get("f1")}</div>
+                <div class="mt-2 text-warning">${errors.get("student_number")}</div>
             </form>
+            <label style="color: aqua;">科目情報を選択または、学生情報を入力して検索ボタンをクリックしてください</label>
 
             <c:choose>
                 <c:when test="${dep == true}">
@@ -58,7 +74,7 @@
                             <th>氏名</th>
                             <th>点数</th>
                         </tr>
-                        <c:forEach var="test" items="${tests}"> <!-- ここでTestオブジェクトのリストをループ -->
+                        <c:forEach var="test" items="${tests}">
                             <tr>
                                 <td>${test.student.entYear}</td>
                                 <td>${test.student.classNum}</td>
