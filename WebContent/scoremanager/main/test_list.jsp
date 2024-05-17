@@ -109,9 +109,7 @@
 			</table>
 		</c:when>
 	</c:choose>
-	<div class="col-2 text-center">
-    <button class="btn btn-secondary" id="filter-button" onclick="test_regist_done.jsp">登録して終了</button>
-    </div>
+
 
 	</section>
 	</c:param>
