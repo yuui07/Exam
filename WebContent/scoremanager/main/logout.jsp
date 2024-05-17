@@ -19,7 +19,7 @@
 					 		ログアウトしました
 					 	</div>
 						<div class="">
-							<a href="Login.action">ログイン</a>
+							<a href="../login.jsp">ログイン</a>
 						</div>
 					</div>
 					<c:if test="${errors.size()>0}">
