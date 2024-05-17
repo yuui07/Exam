@@ -14,6 +14,14 @@
 			<form action = "LoginExecute.action" method="post">
 				<div id="wrap_box">
 					<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2">ログアウト</h2>
+					 <div>
+					 	<div class="">
+					 		ログアウトしました
+					 	</div>
+						<div class="">
+							<a href="Login.action">ログイン</a>
+						</div>
+					</div>
 					<c:if test="${errors.size()>0}">
 						<div>
 							<ul>
@@ -24,9 +32,6 @@
 							</ul>
 						</div>
 					</c:if>
-				<div class="mt-4">
-						<input class="w-25 btn btn-lg btn-primary" type="submit" name="logout" value="ログアウト"/>
-					</div>
 				</div>
 			</form>
 		</section>
