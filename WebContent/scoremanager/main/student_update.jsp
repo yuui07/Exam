@@ -19,7 +19,7 @@
 
 					<label class="form-label" for="ent-year">入学年度</label>
 					<br>
-					<input type="text" id="ent-year" value="${ent-year}" size=84><br><br>
+					<input type="text" id="ent-year" value="${entyear}" size=84><br><br>
 
 
 

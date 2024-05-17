@@ -32,7 +32,7 @@ public class StudentUpdateExecuteAction extends Action {
 		StudentDao sDao=new StudentDao();//学生dao
 		Map<String, String>errors=new HashMap<>();//エラーメッセージ
 
-		entYearStr=request.getParameter("ent-year");//入学年度
+		entYearStr=request.getParameter("entyear");//入学年度
 		no=request.getParameter("no");//学生番号
 		name=request.getParameter("name");//氏名
 		classNum=request.getParameter("class_num");//クラス
@@ -42,7 +42,7 @@ public class StudentUpdateExecuteAction extends Action {
 			entYear=Integer.parseInt(entYearStr);
 		}// チェックボックスの値が "t" の場合に true を設定する
 		System.out.println("---------------------");
-		System.out.println(entYearStr);
+		System.out.println(entYear);
 		System.out.println(no);
 		System.out.println(name);
 		System.out.println(classNum);
