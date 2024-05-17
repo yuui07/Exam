@@ -15,7 +15,20 @@
 <label class="form-label"for="student-f1-select">入学年度</label>
 <select class="form-select"id="student-f1-select"name="f1">
 <option value="0">-------</option>
+<option value="2011">2011</option>
+<option value="2012">2012</option>
+<option value="2013">2013</option>
+<option value="2014">2014</option>
+<option value="2015">2015</option>
+<option value="2016">2016</option>
 
+<option value="2017">2017</option>
+<option value="2018">2018</option>
+<option value="2011">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="2023">2023</option>
 <c:forEach var="year" items="${ent_year_set}">
 <%--現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
 <option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>

@@ -35,25 +35,13 @@ public class StudentUpdateExecuteAction extends Action {
 		StudentDao sDao=new StudentDao();//学生dao
 		Map<String, String>errors=new HashMap<>();//エラーメッセージ
 
-<<<<<<< HEAD
-		entYearStr=request.getParameter("entyear");//入学年度
-		no=request.getParameter("no");//学生番号
-		name=request.getParameter("name");//氏名
-		classNum=request.getParameter("class_num");//クラス
-		isAttend = "t".equals(request.getParameter("f5"));
-		if (entYearStr!=null){
-			//数値に変換
-			entYear=Integer.parseInt(entYearStr);
-		}// チェックボックスの値が "t" の場合に true を設定する
-=======
 		entYearStr=request.getParameter("f1");//入学年度
 		no=request.getParameter("f2");//学生番号
 		name=request.getParameter("f3");//氏名
 		classNum=request.getParameter("f4");//クラス
 		isAttend = "t".equals(request.getParameter("f5")); // チェックボックスの値が "t" の場合に true を設定する
->>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
 		System.out.println("---------------------");
-		System.out.println(entYear);
+		System.out.println(entYearStr);
 		System.out.println(no);
 		System.out.println(name);
 		System.out.println(classNum);

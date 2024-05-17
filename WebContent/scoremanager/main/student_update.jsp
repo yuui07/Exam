@@ -18,11 +18,7 @@
 					<div class="col-lg-12">
 					<label class="form-label" for="ent-year">入学年度</label>
 					<br>
-<<<<<<< HEAD
-					<input type="text" id="ent-year" value="${entyear}" size=84><br><br>
-=======
 					<input type="text" id="ent-year" value="${ent_year}" size=84><br><br>
->>>>>>> branch 'master' of https://github.com/yuui07/Exam.git
 
 					<label class="form-label" for="no">学生番号</label><br>
 					<input type="text" id="no" value="${no}"size=84><br><br>
