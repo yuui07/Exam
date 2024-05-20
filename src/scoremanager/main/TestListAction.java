@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import dao.SubjectDao;
 import dao.TestDao;
 import tool.Action;
 
+@WebServlet("/testlist")
 public class TestListAction extends Action {
 
     @Override
@@ -29,12 +31,11 @@ public class TestListAction extends Action {
         String entYearStr = request.getParameter("f1");
         String classNum = request.getParameter("f2");
         String subjectStr = request.getParameter("f3");
-        String numStr = request.getParameter("f4");
-        String isAttendStr = request.getParameter("f5");
+        String studentNumber = request.getParameter("student_number");
 
         int entYear = 0;
         int num = 0;
-        boolean isAttend = false;
+        boolean dep = false;
         List<Student> students = null;
         LocalDate todaysDate = LocalDate.now();
         int year = todaysDate.getYear();
@@ -56,28 +57,21 @@ public class TestListAction extends Action {
             }
         }
 
-        // 番号のバリデーション
-        if (numStr != null && !numStr.trim().isEmpty()) {
+        // 学生番号のバリデーション
+        if (studentNumber != null && !studentNumber.trim().isEmpty()) {
             try {
-                num = Integer.parseInt(numStr);
+                num = Integer.parseInt(studentNumber);
             } catch (NumberFormatException e) {
-                errors.put("f4", "有効な番号を指定してください。");
+                errors.put("student_number", "有効な学生番号を指定してください。");
             }
         }
 
-        // 在学フラグのバリデーション
-        if (isAttendStr != null && !isAttendStr.trim().isEmpty()) {
-            isAttend = Boolean.parseBoolean(isAttendStr);
-        }
-
         // 科目のバリデーション
-        if (subjectStr != null && !subjectStr.trim().isEmpty()) {
+        if (subjectStr != null && !subjectStr.trim().isEmpty() && !subjectStr.equals("0")) {
             subject = subDao.get(subjectStr, teacher.getSchool());
             if (subject == null) {
                 errors.put("f3", "指定された科目が見つかりません。");
             }
-        } else {
-            errors.put("f3", "有効な科目を指定してください。");
         }
 
         // エラーチェック
@@ -93,15 +87,15 @@ public class TestListAction extends Action {
 
         // 学生リストの取得
         if (entYear != 0 && classNum != null && !classNum.equals("0")) {
-            students = sDao.filter(teacher.getSchool(), entYear, classNum, isAttend);
+            students = sDao.filter(teacher.getSchool(), entYear, classNum, true);
         } else if (entYear != 0) {
-            students = sDao.filter(teacher.getSchool(), entYear, isAttend);
+            students = sDao.filter(teacher.getSchool(), entYear, true);
         } else if (classNum == null || classNum.equals("0")) {
-            students = sDao.filter(teacher.getSchool(), isAttend);
+            students = sDao.filter(teacher.getSchool(), true);
         } else {
             errors.put("f1", "クラスを指定する場合は入学年度も指定してください。");
             request.setAttribute("errors", errors);
-            students = sDao.filter(teacher.getSchool(), isAttend);
+            students = sDao.filter(teacher.getSchool(), true);
         }
 
         // 入学年度リストの初期化
@@ -110,22 +104,16 @@ public class TestListAction extends Action {
             entYearSet.add(i);
         }
 
-        // 番号リストの初期化
-        List<Integer> numSet = new ArrayList<>();
-        for (int i = 1; i <= 3; i++) {
-            numSet.add(i);
-        }
-
         // リクエスト属性の設定
         request.setAttribute("f1", entYear);
         request.setAttribute("f2", classNum);
-        request.setAttribute("f3", subjectList);
-        request.setAttribute("f4", num);
-        request.setAttribute("f5", isAttend);
+        request.setAttribute("f3", subjectStr);
+        request.setAttribute("student_number", studentNumber);
         request.setAttribute("students", students);
         request.setAttribute("class_num_set", classList);
         request.setAttribute("ent_year_set", entYearSet);
-        request.setAttribute("num_set", numSet);
+        request.setAttribute("subject_set", subjectList);
+        request.setAttribute("errors", errors);
 
         // フォワード
         request.getRequestDispatcher("test_list.jsp").forward(request, response);
