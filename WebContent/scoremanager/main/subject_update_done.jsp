@@ -23,7 +23,7 @@ pageEncoding="UTF-8"%>
 <p class="text-center"style="color: black; background-color: #aad4aa; text-align: center;">変更が完了しました</p>
 </div>
 </div>
-<a href="subject_update.jsp" class="mt-3">科目一覧</a>
+<a href="SubjectList.action" class="mt-3">科目一覧</a>
 </section>
 </c:param>
 </c:import>
