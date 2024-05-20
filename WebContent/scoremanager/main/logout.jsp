@@ -20,7 +20,7 @@
 <br>
 <br>
 <div style="margin-top: 20px;">
-<a class="nav-item px-2" href="login.jsp">ログイン</a>
+<a class="nav-item px-2" href="../login.jsp">ログイン</a>
 <span style="margin: 0 10px;"></span>
 
 </div>
