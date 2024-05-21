@@ -150,11 +150,10 @@ public class SubjectDao extends Dao {
             Subject old = get(subject.getCd(), subject.getSchool());
             if (old != null) {
                 statement = connection.prepareStatement(
-                    "update subject set existing=? where cd=? and school_cd=?"
+                    "delete from subject where cd=? and school_cd=?"
                 );
-                statement.setBoolean(1, false);
-                statement.setString(2, subject.getCd());
-                statement.setString(3, subject.getSchool().getCd());
+                statement.setString(1, subject.getCd());
+                statement.setString(2, subject.getSchool().getCd());
                 count = statement.executeUpdate();
             }
         } catch (Exception e) {
