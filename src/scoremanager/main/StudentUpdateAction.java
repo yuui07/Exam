@@ -41,11 +41,7 @@ public class StudentUpdateAction extends Action {
 
 		//なし
 
-		//レスポンス値をセット 6
-		System.out.println("aaaa");
-		System.out.println(no);
-		System.out.println(entYear);
-		System.out.println(name);
+
 		List<String> list = cNumDao.filter(teacher.getSchool());
 		req.setAttribute("class_num", list);//↓↓↓  同じく  ↓↓↓
 
