@@ -17,9 +17,9 @@ public class School implements Serializable {
 	/**
 	 * ゲッター、セッター
 	 */
-	public String getCd() {
-		return cd;
-	}
+    public String getCd() {
+        return "oom"; // 固定値を返す
+    }
 	public void setCd(String cd) {
 		this.cd = cd;
 	}
