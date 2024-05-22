@@ -1,5 +1,5 @@
 package scoremanager.main;
-import java.time.LocalDate;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,95 +13,68 @@ import bean.Teacher;
 import dao.ClassNumDao;
 import dao.StudentDao;
 import tool.Action;
+
 public class StudentUpdateExecuteAction extends Action {
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//TODO 自動生成されたメソッド·スタブ
-		HttpSession session=request.getSession();//セッション
-		Teacher teacher=(Teacher)session.getAttribute("user");
+    @Override
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession(); // セッション情報を取得
+        Teacher teacher = (Teacher) session.getAttribute("user");
 
-		String no="";
-		String name="";
-		String classNum="";//入力されたクラス番号
-		int entYear=0;//入学年度
-		boolean isAttend=false;//在学フラグ
+        // パラメータの取得
+        String no = request.getParameter("no");
+        String name = request.getParameter("name");
+        String classNum = request.getParameter("class_num");
+        String entYearStr = request.getParameter("entyear");
+        boolean isAttend = "t".equals(request.getParameter("f5"));
 
-		//List<Student>students=null;//学生リスト
+        int entYear = 0;
+        Map<String, String> errors = new HashMap<>(); // エラーメッセージ
 
-		LocalDate todaysDate=LocalDate.now();//LocolDateインスタンスを取得
-		int year=todaysDate.getYear();//現在の年を取得
-		StudentDao sDao=new StudentDao();//学生dao
-		Map<String, String>errors=new HashMap<>();//エラーメッセージ
+        // 入学年度の変換
+        try {
+            entYear = Integer.parseInt(entYearStr);
+        } catch (NumberFormatException e) {
+            errors.put("entyear", "有効な入学年度を入力してください。");
+        }
 
-//入学年度
-		no=request.getParameter("no");//学生番号
-		name=request.getParameter("name");//氏名
-		classNum=request.getParameter("class_num");//クラス
-		isAttend = "t".equals(request.getParameter("f5"));
+        // エラーチェック
+        if (name.isEmpty()) {
+            errors.put("name", "氏名を入力してください。");
+        }
 
-		System.out.println("---------------------");
-		System.out.println(entYear);
-		System.out.println(no);
-		System.out.println(name);
-		System.out.println(classNum);
-		System.out.println("---------------------");
+        if (classNum.isEmpty()) {
+            errors.put("class_num", "クラスを入力してください。");
+        }
 
+        // エラーがある場合の処理
+        if (!errors.isEmpty()) {
+            request.setAttribute("errors", errors);
+            request.setAttribute("no", no);
+            request.setAttribute("entyear", entYearStr);
+            request.setAttribute("name", name);
 
-		if (name.isEmpty()){
+            ClassNumDao cNumDao = new ClassNumDao();
+            List<String> list = cNumDao.filter(teacher.getSchool());
+            request.setAttribute("class_num", list);
 
-			errors.put("name", "氏名を選択してください");
-			request.setAttribute("no", no);
-			request.setAttribute("entyear", entYear);
-			request.setAttribute("name", name);
-			request.setAttribute("errors", errors);
-			ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
-			List<String> list = cNumDao.filter(teacher.getSchool());
-			request.setAttribute("class_num", list);//↓↓↓  同じく  ↓↓↓
-			request.getRequestDispatcher("student_update.jsp").forward(request, response);
+            request.getRequestDispatcher("student_update.jsp").forward(request, response);
+            return;
+        }
 
-		}else if (classNum.equals("class_num")){
+        // 学生情報の更新
+        Student student = new Student();
+        student.setNo(no);
+        student.setName(name);
+        student.setEntYear(entYear);
+        student.setClassNum(classNum);
+        student.setAttend(isAttend);
+        student.setSchool(teacher.getSchool());
 
-			errors.put("class_num", "クラスを入力してください");
-			request.setAttribute("no", no);
-			request.setAttribute("year", entYear);
-			request.setAttribute("name", name);
-			ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
-			List<String> list = cNumDao.filter(teacher.getSchool());
-			request.setAttribute("class_num", list);//↓↓↓  同じく  ↓↓↓
-			request.getRequestDispatcher("student_update.jsp").forward(request, response);
+        StudentDao sDao = new StudentDao();
+        sDao.save(student);
 
-		}else {
-			Student student = new Student();
-	        student.setNo(no);
-	        student.setName(name);
-	        student.setEntYear(entYear);
-	        student.setClassNum(classNum);
-	        student.setAttend(isAttend);
-	        student.setSchool(teacher.getSchool()); // 学校情報をセット
-		    request.getRequestDispatcher("student_update_done.jsp").forward(request, response);
-
-
-		    sDao.save(student);
-		}
-
-	}
+        // 更新後の処理
+        request.getRequestDispatcher("student_update_done.jsp").forward(request, response);
+    }
 }
-
-		//在学フラグが送信されていた場合
-//		if (isAttendStr!=null){
-//			//在学フラグを立てる
-//			isAttend=true;
-//			//リクエストに在学フラグをセット
-//			request.setAttribute("f3",isAttendStr);
-//		}
-		//リクエストに学生リストをセット
-//		request.setAttribute("students",students);
-//		//リクエストにデータをセット
-//		request.setAttribute("class_num_set",list);
-//		request.setAttribute("ent_year_set",entYearSet);
-//
-//		//JSPにフォワード 7
-//		request.getRequestDispatcher("student_list.jsp").forward(request,response);
-
-

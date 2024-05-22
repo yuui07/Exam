@@ -143,4 +143,24 @@ public class TestDao extends Dao {
             return false;
         }
     }
+
+    public boolean createTest(Student student, Subject subject, School school, int no) throws Exception {
+        String sql = "INSERT INTO TEST (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, student.getNo());
+            stmt.setString(2, subject.getCd());
+            stmt.setString(3, school.getCd());
+            stmt.setInt(4, no);
+            stmt.setInt(5, 0); // 初期値は0
+            stmt.setString(6, student.getClassNum());
+
+            int affectedRows = stmt.executeUpdate();
+            return affectedRows == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
