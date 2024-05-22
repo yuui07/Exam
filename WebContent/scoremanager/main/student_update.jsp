@@ -49,8 +49,39 @@
                         </select>
                         <br><br>
 
+
+</div>
+
+					<label class="form-label" for="name">氏名</label><br>
+					<input class="form-control-plaintext ps-3" type="text" name="name" id = "name" readonly value="${name}"><br><br>
+
                         <!-- 在学中のチェックボックス -->
                         在学中<input type="checkbox" name="is_attend" value="true" <c:if test="${is_attend}">checked</c:if>><br><br>
+
+		  			<div class="col-11">
+<label class="form-label" for="class_num">クラス</label>
+<select class="form-select" id="class_num" name="class_num">
+<option value="0">--------</option>
+<option value="101">101</option>
+<option value="102">102</option>
+<option value="201">201</option>
+<option value="202">202</option>
+<c:forEach var="num" items="${class_num_set}">
+<%--現在のnumと選択されていたf4が一致していた場合selectedを追記 --%>
+<option value="${num}"<c:if test="${num==f4}">selected</c:if>>${num}</option>
+</c:forEach>
+</select>
+</div>
+<br>
+
+					在学中<input type="checkbox" name="si_attend"><br><br>
+					<button type="submit">変更</button><br><br>
+					<a href="StudentList.action">戻る</a>
+					</div>
+
+    		</form>
+		</section>
+	</c:param>
 
                         <!-- 送信ボタン -->
                         <button type="submit">変更</button><br><br>
@@ -61,4 +92,5 @@
             </form>
         </section>
     </c:param>
+
 </c:import>
