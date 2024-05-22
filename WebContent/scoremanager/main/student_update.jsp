@@ -10,7 +10,7 @@
 
     <c:param name="content">
         <section class="me-4">
-            <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">学生情報変更a</h2>
+            <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">学生情報変更</h2>
 
             <!-- フォームのアクションとメソッドを指定 -->
             <form action="StudentUpdateExecute.action" method="post">
