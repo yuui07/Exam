@@ -1,5 +1,4 @@
 package scoremanager.main;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,13 +23,12 @@ public class StudentUpdateExecuteAction extends Action {
 		String no="";
 		String name="";
 		String classNum="";//入力されたクラス番号
-		int entYear=0;//入学年度
+		String entYearStr="";//入学年度
 		boolean isAttend=false;//在学フラグ
 
 		//List<Student>students=null;//学生リスト
 
-		LocalDate todaysDate=LocalDate.now();//LocolDateインスタンスを取得
-		int year=todaysDate.getYear();//現在の年を取得
+
 		StudentDao sDao=new StudentDao();//学生dao
 		Map<String, String>errors=new HashMap<>();//エラーメッセージ
 
@@ -38,10 +36,25 @@ public class StudentUpdateExecuteAction extends Action {
 		no=request.getParameter("no");//学生番号
 		name=request.getParameter("name");//氏名
 		classNum=request.getParameter("class_num");//クラス
+		entYearStr=request.getParameter(entYearStr);
 		isAttend = "t".equals(request.getParameter("f5"));
 
+		Student student = new Student();
+        student.setNo(no);
+        student.setName(name);
+        student.setEntYear(entYearStr);
+        student.setClassNum(classNum);
+        student.setAttend(isAttend);
+        student.setSchool(teacher.getSchool()); // 学校情報をセット
+	    request.getRequestDispatcher("student_update_done.jsp").forward(request, response);
+
+
+	    sDao.save(student);
+
+
+
 		System.out.println("---------------------");
-		System.out.println(entYear);
+		System.out.println(entYearStr);
 		System.out.println(no);
 		System.out.println(name);
 		System.out.println(classNum);
@@ -52,7 +65,7 @@ public class StudentUpdateExecuteAction extends Action {
 
 			errors.put("name", "氏名を選択してください");
 			request.setAttribute("no", no);
-			request.setAttribute("entyear", entYear);
+			request.setAttribute("entyear", entYearStr);
 			request.setAttribute("name", name);
 			request.setAttribute("errors", errors);
 			ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
@@ -64,7 +77,7 @@ public class StudentUpdateExecuteAction extends Action {
 
 			errors.put("class_num", "クラスを入力してください");
 			request.setAttribute("no", no);
-			request.setAttribute("year", entYear);
+			request.setAttribute("year", entYearStr);
 			request.setAttribute("name", name);
 			ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
 			List<String> list = cNumDao.filter(teacher.getSchool());

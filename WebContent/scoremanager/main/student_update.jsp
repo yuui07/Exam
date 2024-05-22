@@ -26,8 +26,11 @@
 					<label class="form-label" for="no">学生番号</label><br>
 					<input type="text" id="no" value="${no}"size=84><br><br>
 
+
+</div>
+
 					<label class="form-label" for="name">氏名</label><br>
-					<input type="text" id="name" name="name" maxlength=30 value="${name}" size=84 placeholder="氏名を入力してください" required><br><br>
+					<input class="form-control-plaintext ps-3" type="text" name="name" id = "name" readonly value="${name}"><br><br>
 
 		  			<div class="col-11">
 <label class="form-label" for="class_num">クラス</label>
@@ -49,7 +52,7 @@
 					<button type="submit">変更</button><br><br>
 					<a href="StudentList.action">戻る</a>
 					</div>
-				</div>
+
     		</form>
 		</section>
 	</c:param>
