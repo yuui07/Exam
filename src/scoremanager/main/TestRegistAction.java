@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.Student;
 import bean.Subject;
 import bean.Teacher;
 import bean.Test;
 import dao.ClassNumDao;
+import dao.StudentDao;
 import dao.SubjectDao;
 import dao.TestDao;
 import tool.Action;
@@ -74,7 +76,7 @@ public class TestRegistAction extends Action {
         int entYear = 0;
         int num = 0;
         boolean deployment = false;
-        List<Test> tests = null;
+        List<Test> tests = new ArrayList<>();
         Map<String, String> errors = new HashMap<>(); // エラーメッセージ
 
         // 入力値の確認
@@ -122,6 +124,28 @@ public class TestRegistAction extends Action {
             // 成績管理一覧で表示するために必要なデータを取得
             TestDao testDao = new TestDao();
             tests = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
+
+            // 必要なテストデータが存在しない場合、新しく作成
+            StudentDao studentDao = new StudentDao();
+            List<Student> students = studentDao.filter(teacher.getSchool(), entYear, classNum, true);
+
+            for (Student student : students) {
+                Test test = testDao.get(student, subject, teacher.getSchool(), num);
+                if (test == null) {
+                    // テストデータが存在しない場合、新しく作成
+                    test = new Test();
+                    test.setStudent(student);
+                    test.setSubject(subject);
+                    test.setSchool(teacher.getSchool());
+                    test.setNo(num);
+                    test.setPoint(0); // 初期値は0
+                    test.setClassNum(classNum);
+
+                    // データベースに新しいテストデータを保存
+                    testDao.createTest(student, subject, teacher.getSchool(), num);
+                }
+                tests.add(test);
+            }
 
             // デバッグ出力
             System.out.println("Tests: " + tests);

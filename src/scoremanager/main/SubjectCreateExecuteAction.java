@@ -18,7 +18,6 @@ public class SubjectCreateExecuteAction extends Action {
         HttpSession session = req.getSession(); // セッション
         Teacher teacher = (Teacher) session.getAttribute("user");
 
-
         String subjectName = ""; // 入力された科目名
         String subjectCd = ""; // 入力された科目コード
         Subject makeSubject = new Subject(); // 送信用科目情報
@@ -33,25 +32,23 @@ public class SubjectCreateExecuteAction extends Action {
         Subject isSubject = sDao.get(subjectCd, teacher.getSchool());
 
         // エラーチェック
-        if (subjectCd.length()>=4){
-        	System.out.println("★文字数超過");
-        	errors.put("f2", "科目コードは3文字以内にしてください");
+        if (subjectCd.length() >= 4) {
+            System.out.println("★文字数超過");
+            errors.put("f2", "科目コードは3文字以内にしてください");
             req.setAttribute("errors", errors);
             req.setAttribute("cd", subjectCd);
             req.setAttribute("name", subjectName);
             req.getRequestDispatcher("SubjectCreate.action").forward(req, res);
 
-        } else if (isSubject != null && subjectName.equals("0")) {
-            System.out.println("★リスト未選択かつ科目コード重複");
-            errors.put("f1", "科目名を入力してください");
-            errors.put("f2", "科目コードが重複しています");
-            req.setAttribute("errors", errors);
-            req.setAttribute("cd", subjectCd);
-            req.setAttribute("name", subjectName);
-            req.getRequestDispatcher("SubjectCreate.action").forward(req, res);
-        } else if (subjectName.equals("0")) {
-            System.out.println("★リスト未選択");
-            errors.put("f1", "科目名を入力してください");
+        } else if (subjectName.isEmpty()) {
+            if (isSubject != null) {
+                System.out.println("★リスト未選択かつ科目コード重複");
+                errors.put("f1", "科目名を入力してください");
+                errors.put("f2", "科目コードが重複しています");
+            } else {
+                System.out.println("★リスト未選択");
+                errors.put("f1", "科目名を入力してください");
+            }
             req.setAttribute("errors", errors);
             req.setAttribute("cd", subjectCd);
             req.setAttribute("name", subjectName);
@@ -63,19 +60,24 @@ public class SubjectCreateExecuteAction extends Action {
             req.setAttribute("cd", subjectCd);
             req.setAttribute("name", subjectName);
             req.getRequestDispatcher("SubjectCreate.action").forward(req, res);
-        } else if (isSubject == null) {
+        } else {
             System.out.println("★リスト選択OK、科目コード重複無し");
             // 送信用の科目情報の作成
             makeSubject.setCd(subjectCd);
             makeSubject.setName(subjectName);
             makeSubject.setSchool(teacher.getSchool());
+
             // 送信
             boolean end = sDao.save(makeSubject);
+            System.out.println("saveメソッドの結果: " + end);
 
             if (end) {
+                System.out.println("★登録に成功しました");
                 req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
             } else {
                 System.out.println("★登録に失敗しました");
+                errors.put("f2", "科目コードが重複しています");
+                req.setAttribute("errors", errors);
                 req.setAttribute("cd", subjectCd);
                 req.setAttribute("name", subjectName);
                 req.getRequestDispatcher("SubjectCreate.action").forward(req, res);

@@ -13,49 +13,33 @@ import tool.Action;
 
 public class StudentUpdateAction extends Action {
 
-	@Override
+    @Override
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+        // ローカル変数の宣言
+        HttpSession session = req.getSession(); // セッション情報を取得
+        Teacher teacher = (Teacher) session.getAttribute("user");
 
-		// ローカル変数の宣言
+        // パラメータの取得
+        String no = req.getParameter("no");
+        String entYear = req.getParameter("entyear");
+        String name = req.getParameter("name");
 
-		HttpSession session = req.getSession(); // セッション情報を取得
+        // 現在の年を取得
+        LocalDate todaysDate = LocalDate.now(); // LocalDateインスタンスを取得
+        int year = todaysDate.getYear(); // 現在の年を取得
+        ClassNumDao cNumDao = new ClassNumDao(); // クラス番号Daoをインスタンス化
 
-		Teacher teacher = (Teacher)session.getAttribute("user");
-		String no="";
-		String entYear="";
+        // クラス番号のリストを取得
+        List<String> list = cNumDao.filter(teacher.getSchool());
 
-		String name = "";
+        // リクエストにデータをセット
+        req.setAttribute("class_num", list);
+        req.setAttribute("no", no);
+        req.setAttribute("entyear", entYear);
+        req.setAttribute("name", name);
 
-		LocalDate todaysDate = LocalDate.now();	// LocalDateインスタンスを取得
-		int year = todaysDate.getYear();	// 現在の年を取得
-		ClassNumDao cNumDao = new ClassNumDao();	// クラス番号Daoをインスタンス化
-
-		entYear=req.getParameter("entyear");
-
-		no=req.getParameter("no");
-		name = req.getParameter("name");
-
-
-		//DBへデータ保存 5
-
-		//なし
-
-
-		List<String> list = cNumDao.filter(teacher.getSchool());
-		req.setAttribute("class_num", list);//↓↓↓  同じく  ↓↓↓
-
-		req.setAttribute("no", no);	// リクエストにデータをセット
-
-		req.setAttribute("entyear", entYear);//↓↓↓  同じく  ↓↓↓
-		req.setAttribute("name", name);//↓↓↓  同じく  ↓↓↓a
-
-
-
-		//JSPへフォワード 7
-
-		req.getRequestDispatcher("student_update.jsp").forward(req, res); // 学生一覧まで画面遷移
-
-	}
-
+        // JSPへフォワード
+        req.getRequestDispatcher("student_update.jsp").forward(req, res);
+    }
 }
